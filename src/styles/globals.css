@@ -184,20 +184,18 @@
   
   /* Dashboard Block - ONLY for Dashboard modules - UPDATED: 1px hairline stroke */
   .dashboard-block {
-    background: var(--glass-surface);
+    position: relative;
+    background: var(--glass-surface);           /* 内部玻璃 */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid transparent;
-    background-image: 
-      linear-gradient(var(--glass-surface), var(--glass-surface)),
-      linear-gradient(135deg, rgba(46, 242, 255, 0.2), rgba(0, 245, 212, 0.2));
-    background-origin: border-box;
-    background-clip: content-box, border-box;
+    border: none;                               /* 🚫 不要真实边框 */
     border-radius: 24px;
+    padding: 2px;                              /* 可以略减 padding 显得更轻 */
     box-shadow: var(--shadow-soft);
-    padding: 24px;
-    transition: all 0.2s ease-in-out;
+    z-index: 0; /* 为了伪元素能放到下面 */
+    box-shadow: var(--shadow-soft), var(--glow-cyan);
   }
+
 
   .dashboard-block:hover {
     transform: scale(1.02);

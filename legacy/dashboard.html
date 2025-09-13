@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EnergyLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+    <!-- Top Header with Logo (Sign Out) -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo-container" onclick="signOut()">
+                <span class="logo-text">EnergyLink</span>
+                <span class="sign-out-hint">Click to sign out</span>
+            </div>
+            <div class="header-actions">
+                <!-- Auto-Trade Button -->
+                <button class="auto-trade-btn" id="autoTradeBtn" onclick="toggleAutoTrade()">
+                    <span class="auto-trade-icon">⚡</span>
+                    <span class="auto-trade-text">Auto-Trade</span>
+                    <span class="auto-trade-status" id="autoTradeStatus">Inactive</span>
+                </button>
+                <!-- Settings Gear Icon -->
+                <button class="settings-gear" id="settingsGear" onclick="openTradingPreferences()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <span id="userInitials">U</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">User</span>
+                        <span class="user-status" id="userRole">Buyer</span>
+                    </div>
+                    <div class="role-switcher">
+                        <button class="role-switch-btn" onclick="toggleUserRole()" title="Switch Role">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <!-- Top Row: Energy Price Trends (2/3) + Account Overview (1/3) -->
+            <div class="dashboard-top-row">
+                <!-- Energy Price Trends (2/3) -->
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2>Energy Price Trends</h2>
+                        <div class="chart-controls">
+                            <div class="time-filters">
+                                <button class="time-btn active" data-period="1h">1H</button>
+                                <button class="time-btn" data-period="4h">4H</button>
+                                <button class="time-btn" data-period="1d">1D</button>
+                                <button class="time-btn" data-period="1w">1W</button>
+                            </div>
+                            <button class="btn-refresh" onclick="refreshChart()">🔄</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="priceChart" width="800" height="400"></canvas>
+                        <div class="chart-overlay">
+                            <div class="current-price">
+                                <span class="price-label">Current Price</span>
+                                <span class="price-value" id="currentPrice">$0.45</span>
+                                <span class="price-change positive" id="priceChange">+2.3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Overview Card (1/3) -->
+                <div class="account-overview-card">
+                    <div class="card-header">
+                        <h2>Account Overview</h2>
+                        <div class="range-controls">
+                            <button class="range-btn active" data-range="24h">24H</button>
+                            <button class="range-btn" data-range="7d">7D</button>
+                            <button class="range-btn" data-range="30d">30D</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="donut-chart-container">
+                            <canvas id="accountDonutChart" width="200" height="200"></canvas>
+                            <div class="donut-center">
+                                <div class="donut-value" id="donutValue">0</div>
+                                <div class="donut-label" id="donutLabel">kWh</div>
+                            </div>
+                        </div>
+                        <div class="kpi-chips">
+                            <div class="kpi-chip">
+                                <div class="kpi-label" id="kpi1Label">kWh Today</div>
+                                <div class="kpi-value" id="kpi1Value">0</div>
+                            </div>
+                            <div class="kpi-chip">
+                                <div class="kpi-label" id="kpi2Label">Savings/Uplift</div>
+                                <div class="kpi-value" id="kpi2Value">$0.00</div>
+                            </div>
+                            <div class="kpi-chip">
+                                <div class="kpi-label" id="kpi3Label">Status</div>
+                                <div class="kpi-value" id="kpi3Value">Active</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Live Trades and Manual Trading -->
+            <section class="trading-section">
+                <!-- Live Trades Feed -->
+                <div class="trades-panel">
+                    <div class="panel-header">
+                        <h3>Live Trades Feed</h3>
+                        <div class="panel-actions">
+                            <span class="live-indicator">● LIVE</span>
+                            <button class="btn-refresh" onclick="refreshTrades()">🔄</button>
+                        </div>
+                    </div>
+                    <div class="trades-container">
+                        <div class="trades-table-wrapper">
+                            <table class="trades-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>User</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tradesTableBody">
+                                    <!-- Dynamic content will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Buy/Sell Panel -->
+                <div class="manual-trading-panel">
+                    <div class="panel-header">
+                        <h3>Manual Trading</h3>
+                        <div class="trading-tabs">
+                            <button class="tab-btn active" data-tab="buy">Buy</button>
+                            <button class="tab-btn" data-tab="sell">Sell</button>
+                        </div>
+                    </div>
+                    <div class="trading-form">
+                        <div class="form-group">
+                            <label for="tradeQuantity">Quantity (kWh)</label>
+                            <input type="number" id="tradeQuantity" min="0.1" step="0.1" value="10" placeholder="Enter quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="tradePrice">Price ($/kWh)</label>
+                            <input type="number" id="tradePrice" min="0.01" step="0.01" value="0.45" placeholder="Enter price">
+                        </div>
+                        <div class="price-suggestions">
+                            <button class="price-btn" onclick="setPrice(0.40)">$0.40</button>
+                            <button class="price-btn" onclick="setPrice(0.45)">$0.45</button>
+                            <button class="price-btn" onclick="setPrice(0.50)">$0.50</button>
+                        </div>
+                        <div class="trade-calculations">
+                            <div class="calc-row">
+                                <span class="calc-label">Expected Savings:</span>
+                                <span class="calc-value" id="expectedSavings">$0.00</span>
+                            </div>
+                            <div class="calc-row">
+                                <span class="calc-label">Total Cost:</span>
+                                <span class="calc-value" id="totalCost">$0.00</span>
+                            </div>
+                        </div>
+                        <button class="btn-place-order" onclick="placeOrder()">
+                            <span class="btn-text">Place Order</span>
+                            <span class="btn-icon">⚡</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

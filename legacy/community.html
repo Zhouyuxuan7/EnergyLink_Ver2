@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - EnergyLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="community.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">EnergyLink</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="community.html" class="nav-link active">Community</a>
+            </div>
+            <div class="nav-actions">
+                <div class="user-avatar">
+                    <span>JD</span>
+                </div>
+                <div class="user-dropdown">
+                    <button class="dropdown-btn">▼</button>
+                    <div class="dropdown-menu">
+                        <a href="#profile">Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Community Header -->
+    <section class="community-header">
+        <div class="container">
+            <h1 class="community-title">Your Energy Community</h1>
+            <p class="community-subtitle">Connect with neighbors, track progress, and celebrate achievements together</p>
+        </div>
+    </section>
+
+    <!-- Community Stats -->
+    <section class="community-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="20" fill="#219653" opacity="0.1"/>
+                            <path d="M15 25L20 30L35 15" stroke="#219653" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">1,247</div>
+                        <div class="stat-label">Total kWh Traded</div>
+                        <div class="stat-change positive">+15% this month</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="20" fill="#FFB703" opacity="0.1"/>
+                            <path d="M25 10L30 20H40L32 28L35 38L25 32L15 38L18 28L10 20H20L25 10Z" stroke="#FFB703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">Active Neighbors</div>
+                        <div class="stat-change positive">+8 this week</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="20" fill="#F3722C" opacity="0.1"/>
+                            <path d="M25 5V25L40 40" stroke="#F3722C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">892</div>
+                        <div class="stat-label">CO₂ Saved (kg)</div>
+                        <div class="stat-change positive">+120 this month</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="20" fill="#073B3A" opacity="0.1"/>
+                            <path d="M25 15L30 25H40L32 32L35 42L25 36L15 42L18 32L10 25H20L25 15Z" stroke="#073B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">$2,340</div>
+                        <div class="stat-label">Community Savings</div>
+                        <div class="stat-change positive">+$180 this week</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Community Content -->
+    <main class="community-main">
+        <div class="container">
+            <div class="community-grid">
+                <!-- Leaderboard -->
+                <div class="leaderboard-section">
+                    <div class="section-header">
+                        <h2>Energy Champions</h2>
+                        <div class="time-filter">
+                            <button class="filter-btn active" data-period="month">This Month</button>
+                            <button class="filter-btn" data-period="week">This Week</button>
+                            <button class="filter-btn" data-period="all">All Time</button>
+                        </div>
+                    </div>
+                    <div class="leaderboard">
+                        <div class="leaderboard-item rank-1">
+                            <div class="rank">1</div>
+                            <div class="neighbor-info">
+                                <div class="neighbor-avatar">SM</div>
+                                <div class="neighbor-details">
+                                    <div class="neighbor-name">Sarah Miller</div>
+                                    <div class="neighbor-location">Oak Street</div>
+                                </div>
+                            </div>
+                            <div class="neighbor-stats">
+                                <div class="stat-value">247 kWh</div>
+                                <div class="stat-label">Traded</div>
+                            </div>
+                            <div class="trophy">🏆</div>
+                        </div>
+
+                        <div class="leaderboard-item rank-2">
+                            <div class="rank">2</div>
+                            <div class="neighbor-info">
+                                <div class="neighbor-avatar">JR</div>
+                                <div class="neighbor-details">
+                                    <div class="neighbor-name">James Rodriguez</div>
+                                    <div class="neighbor-location">Sunset District</div>
+                                </div>
+                            </div>
+                            <div class="neighbor-stats">
+                                <div class="stat-value">198 kWh</div>
+                                <div class="stat-label">Traded</div>
+                            </div>
+                            <div class="trophy">🥈</div>
+                        </div>
+
+                        <div class="leaderboard-item rank-3">
+                            <div class="rank">3</div>
+                            <div class="neighbor-info">
+                                <div class="neighbor-avatar">LP</div>
+                                <div class="neighbor-details">
+                                    <div class="neighbor-name">Lisa Park</div>
+                                    <div class="neighbor-location">Mission District</div>
+                                </div>
+                            </div>
+                            <div class="neighbor-stats">
+                                <div class="stat-value">156 kWh</div>
+                                <div class="stat-label">Traded</div>
+                            </div>
+                            <div class="trophy">🥉</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="neighbor-info">
+                                <div class="neighbor-avatar">DC</div>
+                                <div class="neighbor-details">
+                                    <div class="neighbor-name">David Chen</div>
+                                    <div class="neighbor-location">Castro District</div>
+                                </div>
+                            </div>
+                            <div class="neighbor-stats">
+                                <div class="stat-value">134 kWh</div>
+                                <div class="stat-label">Traded</div>
+                            </div>
+                        </div>
+
+                        <div class="leaderboard-item current-user">
+                            <div class="rank">5</div>
+                            <div class="neighbor-info">
+                                <div class="neighbor-avatar">JD</div>
+                                <div class="neighbor-details">
+                                    <div class="neighbor-name">You</div>
+                                    <div class="neighbor-location">Mission District</div>
+                                </div>
+                            </div>
+                            <div class="neighbor-stats">
+                                <div class="stat-value">127 kWh</div>
+                                <div class="stat-label">Traded</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neighborhood Map -->
+                <div class="map-section">
+                    <div class="section-header">
+                        <h2>Neighborhood Activity</h2>
+                        <div class="map-controls">
+                            <button class="map-btn active" data-view="heatmap">Heat Map</button>
+                            <button class="map-btn" data-view="trades">Recent Trades</button>
+                        </div>
+                    </div>
+                    <div class="neighborhood-map">
+                        <div class="map-container">
+                            <div class="map-grid">
+                                <div class="map-cell active" data-house="1">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">12 kWh</div>
+                                </div>
+                                <div class="map-cell" data-house="2">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">8 kWh</div>
+                                </div>
+                                <div class="map-cell active" data-house="3">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">15 kWh</div>
+                                </div>
+                                <div class="map-cell" data-house="4">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">6 kWh</div>
+                                </div>
+                                <div class="map-cell active" data-house="5">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">20 kWh</div>
+                                </div>
+                                <div class="map-cell" data-house="6">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">4 kWh</div>
+                                </div>
+                                <div class="map-cell active" data-house="7">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">18 kWh</div>
+                                </div>
+                                <div class="map-cell" data-house="8">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">10 kWh</div>
+                                </div>
+                                <div class="map-cell" data-house="9">
+                                    <div class="house-icon">🏠</div>
+                                    <div class="house-stats">7 kWh</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <div class="legend-color high"></div>
+                                <span>High Activity (15+ kWh)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color medium"></div>
+                                <span>Medium Activity (8-14 kWh)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color low"></div>
+                                <span>Low Activity (<8 kWh)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <button class="refresh-btn">🔄</button>
+                    </div>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon">⚡</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <strong>Sarah Miller</strong> sold 12.5 kWh to <strong>James Rodriguez</strong>
+                                </div>
+                                <div class="activity-time">2 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">🏆</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <strong>Lisa Park</strong> reached 100 kWh milestone this month!
+                                </div>
+                                <div class="activity-time">15 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">🌱</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    Community saved 50 kg CO₂ today
+                                </div>
+                                <div class="activity-time">1 hour ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">👋</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <strong>David Chen</strong> joined EnergyLink
+                                </div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">⚡</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <strong>You</strong> bought 8.2 kWh from <strong>Sarah Miller</strong>
+                                </div>
+                                <div class="activity-time">3 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="achievements-section">
+                    <div class="section-header">
+                        <h2>Community Achievements</h2>
+                    </div>
+                    <div class="achievements-grid">
+                        <div class="achievement-card earned">
+                            <div class="achievement-icon">🌱</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Green Pioneer</div>
+                                <div class="achievement-desc">First 100 kWh traded</div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-card earned">
+                            <div class="achievement-icon">⚡</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Power Trader</div>
+                                <div class="achievement-desc">50 successful trades</div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Community Champion</div>
+                                <div class="achievement-desc">Top 3 in monthly leaderboard</div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                    <span class="progress-text">60%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🌍</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Eco Warrior</div>
+                                <div class="achievement-desc">Save 500 kg CO₂</div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 35%"></div>
+                                    </div>
+                                    <span class="progress-text">35%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="community.js"></script>
+</body>
+</html>

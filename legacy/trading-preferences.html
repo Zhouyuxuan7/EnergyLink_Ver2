@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Preferences - EnergyLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="trading-preferences.css">
+</head>
+<body class="trading-preferences-body">
+    <!-- Header -->
+    <header class="preferences-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='dashboard.html'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Dashboard
+                </button>
+                <div class="page-title">
+                    <h1>Trading Preferences</h1>
+                    <p>Customize your trading experience and automation settings</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-save" onclick="savePreferences()">Save Changes</button>
+                <button class="btn-reset" onclick="resetPreferences()">Set to Default</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="preferences-main">
+        <div class="preferences-container">
+            <!-- Order Entry Section -->
+            <section class="preferences-section">
+                <div class="section-header">
+                    <div class="section-icon">⚡</div>
+                    <div class="section-title">
+                        <h2>Order Entry</h2>
+                        <p>Default settings for order tickets and trading automation</p>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="preferences-grid">
+                        <div class="preference-group">
+                            <label class="preference-label">Default Action</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="defaultAction" value="buy" checked>
+                                    <span class="radio-custom"></span>
+                                    Buy
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="defaultAction" value="sell">
+                                    <span class="radio-custom"></span>
+                                    Sell
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Default Quantity (kWh)</label>
+                            <input type="number" class="preference-input" value="10" min="0.1" step="0.1">
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Order Type</label>
+                            <select class="preference-select">
+                                <option value="market">Market</option>
+                                <option value="limit" selected>Limit</option>
+                                <option value="stop-limit">Stop-Limit</option>
+                            </select>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Time-in-Force</label>
+                            <select class="preference-select">
+                                <option value="day" selected>Day</option>
+                                <option value="gtc">Good-Til-Canceled</option>
+                            </select>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Order Confirmations</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Enable confirmations</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Hotkeys</label>
+                            <div class="hotkey-settings">
+                                <div class="hotkey-item">
+                                    <span class="hotkey-label">Quick Buy:</span>
+                                    <input type="text" class="hotkey-input" value="Ctrl+B" readonly>
+                                </div>
+                                <div class="hotkey-item">
+                                    <span class="hotkey-label">Quick Sell:</span>
+                                    <input type="text" class="hotkey-input" value="Ctrl+S" readonly>
+                                </div>
+                                <div class="hotkey-item">
+                                    <span class="hotkey-label">Auto-Trade Toggle:</span>
+                                    <input type="text" class="hotkey-input" value="Ctrl+T" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Automated Brackets</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Attach stop-loss and profit-target automatically</span>
+                                </label>
+                            </div>
+                            <div class="bracket-settings">
+                                <div class="bracket-item">
+                                    <label>Stop-Loss (%):</label>
+                                    <input type="number" class="preference-input" value="5" min="1" max="50">
+                                </div>
+                                <div class="bracket-item">
+                                    <label>Profit-Target (%):</label>
+                                    <input type="number" class="preference-input" value="10" min="1" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications & Alerts Section -->
+            <section class="preferences-section">
+                <div class="section-header">
+                    <div class="section-icon">🔔</div>
+                    <div class="section-title">
+                        <h2>Notifications & Alerts</h2>
+                        <p>Configure alerts for price movements and market events</p>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="preferences-grid">
+                        <div class="preference-group">
+                            <label class="preference-label">Price Alerts</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Enable price alerts</span>
+                                </label>
+                            </div>
+                            <div class="alert-settings">
+                                <div class="alert-item">
+                                    <label>Alert when price crosses:</label>
+                                    <input type="number" class="preference-input" value="0.50" min="0.01" step="0.01" placeholder="Price level">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Volume Spikes</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Alert on volume spikes</span>
+                                </label>
+                            </div>
+                            <div class="alert-settings">
+                                <div class="alert-item">
+                                    <label>Volume threshold (% above average):</label>
+                                    <input type="number" class="preference-input" value="150" min="100" step="10">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Technical Indicators</label>
+                            <div class="indicator-settings">
+                                <div class="indicator-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Moving Average Crossovers</span>
+                                    </label>
+                                </div>
+                                <div class="indicator-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">RSI Overbought/Oversold</span>
+                                    </label>
+                                </div>
+                                <div class="indicator-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">MACD Signal Crossovers</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">News & Earnings</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Energy sector news updates</span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Earnings announcements</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Notification Methods</label>
+                            <div class="notification-methods">
+                                <div class="method-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">In-app notifications</span>
+                                    </label>
+                                </div>
+                                <div class="method-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email alerts</span>
+                                    </label>
+                                </div>
+                                <div class="method-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">SMS notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Platform Behavior Section -->
+            <section class="preferences-section">
+                <div class="section-header">
+                    <div class="section-icon">⚙️</div>
+                    <div class="section-title">
+                        <h2>Platform Behavior</h2>
+                        <p>Risk management and display preferences</p>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="preferences-grid">
+                        <div class="preference-group">
+                            <label class="preference-label">Risk Management</label>
+                            <div class="risk-settings">
+                                <div class="risk-item">
+                                    <label>Maximum order size (kWh):</label>
+                                    <input type="number" class="preference-input" value="100" min="1" step="1">
+                                </div>
+                                <div class="risk-item">
+                                    <label>Daily trading limit (kWh):</label>
+                                    <input type="number" class="preference-input" value="500" min="10" step="10">
+                                </div>
+                                <div class="risk-item">
+                                    <label>Maximum position size (% of portfolio):</label>
+                                    <input type="number" class="preference-input" value="25" min="1" max="100" step="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Buying Power Warnings</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Warn when exceeding buying power</span>
+                                </label>
+                            </div>
+                            <div class="warning-settings">
+                                <div class="warning-item">
+                                    <label>Warning threshold (% of buying power):</label>
+                                    <input type="number" class="preference-input" value="80" min="50" max="100" step="5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Data Feed</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="dataFeed" value="realtime" checked>
+                                    <span class="radio-custom"></span>
+                                    Real-time data
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="dataFeed" value="delayed">
+                                    <span class="radio-custom"></span>
+                                    Delayed data (15 min)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Display Options</label>
+                            <div class="display-settings">
+                                <div class="display-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show price change indicators</span>
+                                    </label>
+                                </div>
+                                <div class="display-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show volume bars</span>
+                                    </label>
+                                </div>
+                                <div class="display-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show technical indicators</span>
+                                    </label>
+                                </div>
+                                <div class="display-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show order book</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preference-group">
+                            <label class="preference-label">Watchlist Columns</label>
+                            <div class="column-settings">
+                                <div class="column-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Price</span>
+                                    </label>
+                                </div>
+                                <div class="column-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Change</span>
+                                    </label>
+                                </div>
+                                <div class="column-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Volume</span>
+                                    </label>
+                                </div>
+                                <div class="column-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Market Cap</span>
+                                    </label>
+                                </div>
+                                <div class="column-item">
+                                    <label class="toggle-option">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">P/E Ratio</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Bottom Action Buttons -->
+        <div class="preferences-actions">
+            <div class="actions-container">
+                <button class="btn-set-default" onclick="resetPreferences()">
+                    <span class="btn-icon">🔄</span>
+                    Set to Default
+                </button>
+                <button class="btn-save-changes" onclick="savePreferences()">
+                    <span class="btn-icon">💾</span>
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="trading-preferences.js"></script>
+</body>
+</html>
