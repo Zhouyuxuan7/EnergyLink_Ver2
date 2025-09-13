@@ -17,7 +17,6 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
     { id: 'home', label: 'Home' },
     { id: 'how-it-works', label: 'How It Works' },
     { id: 'impact', label: 'Impact' },
-    { id: 'style-guide', label: 'Style Guide' },
   ];
 
 

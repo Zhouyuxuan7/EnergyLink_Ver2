@@ -7,9 +7,6 @@ import {
   DollarSign, 
   Zap, 
   CheckCircle, 
-  Users, 
-  Shield, 
-  Clock,
   Play,
   ArrowRight,
   Home,
@@ -74,28 +71,6 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
     }
   ];
 
-  const benefits = [
-    {
-      icon: <DollarSign className="w-6 h-6" />,
-      title: 'Better Economics',
-      description: 'Sellers earn 2-3x utility rates, buyers save 20-30% on electricity'
-    },
-    {
-      icon: <Users className="w-6 h-6" />,
-      title: 'Community Building',
-      description: 'Connect with neighbors and build local energy resilience'
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: 'Secure & Private',
-      description: 'Bank-level security with privacy-first design'
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: 'Fully Automated',
-      description: 'Set preferences once, then let the system handle everything'
-    }
-  ];
 
   return (
     <div className="min-h-screen content-clean">
@@ -200,33 +175,6 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
         </div>
       </div>
 
-      {/* Benefits Section */}
-      <div className="content-section-lg section-energy-glow">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4" 
-                style={{ color: 'var(--txt-heading)' }}>
-              Why choose peer-to-peer energy?
-            </h2>
-            <p className="text-lg" style={{ color: 'var(--txt-primary)' }}>
-              More than just savings – build stronger, more sustainable communities
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="content-clean p-6 text-center transition-all duration-200 hover:transform hover:scale-105">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4"
-                     style={{ backgroundColor: 'rgba(0, 245, 212, 0.1)' }}>
-                  <div className="icon-energy-teal">{benefit.icon}</div>
-                </div>
-                <h3 className="font-semibold mb-3" style={{ color: 'var(--txt-heading)' }}>{benefit.title}</h3>
-                <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>{benefit.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Use Cases Section */}
       <div className="content-section-lg">

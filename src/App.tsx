@@ -12,11 +12,10 @@ import { TradeReceiptScreenDesktop } from './components/screens/TradeReceiptScre
 import { CommunityScreenNew } from './components/screens/CommunityScreenNew';
 import { SettingsScreenDesktop } from './components/screens/SettingsScreenDesktop';
 import { ComponentsScreen } from './components/screens/ComponentsScreen';
-import { StyleGuideScreen } from './components/screens/StyleGuideScreen';
 import { MainNavigation } from './components/layout/MainNavigation';
 import { TopNavigation } from './components/layout/TopNavigation';
 
-type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components' | 'style-guide';
+type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components';
 type Role = 'seller' | 'buyer' | null;
 
 export default function App() {
@@ -64,7 +63,7 @@ export default function App() {
   };
 
   // Navigation visibility logic
-  const isPublicScreen = ['home', 'how-it-works', 'impact', 'style-guide'].includes(currentScreen);
+  const isPublicScreen = ['home', 'how-it-works', 'impact'].includes(currentScreen);
   const isAuthScreen = ['verification', 'priceband'].includes(currentScreen);
   const isProtectedScreen = ['dashboard', 'receipt', 'settings', 'community'].includes(currentScreen);
   
@@ -139,8 +138,6 @@ export default function App() {
         case 'components':
           return <ComponentsScreen />;
         
-        case 'style-guide':
-          return <StyleGuideScreen />;
         
         default:
           return <HomeScreen onJoinForFree={handleJoinForFree} />;

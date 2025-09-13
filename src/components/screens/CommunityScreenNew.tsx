@@ -5,6 +5,7 @@ import { LeaderboardRow } from '../stock/LeaderboardRow';
 import { HeatMapCell } from '../stock/HeatMapCell';
 import { ActivityItem } from '../stock/ActivityItem';
 import { AchievementCard } from '../stock/AchievementCard';
+import { NeighborhoodVisualGrid } from '../stock/NeighborhoodVisualGrid';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { MapPin } from 'lucide-react';
 
@@ -15,7 +16,7 @@ interface CommunityScreenNewProps {
 export function CommunityScreenNew({ className = '' }: CommunityScreenNewProps) {
   const [activeTimeframe, setActiveTimeframe] = useState('month');
   const [leaderboardTimeframe, setLeaderboardTimeframe] = useState('month');
-  const [activityTab, setActivityTab] = useState('heatmap');
+  const [activityTab, setActivityTab] = useState('visual');
   const [selectedLocation, setSelectedLocation] = useState('mission');
   const [kpiVariant, setKpiVariant] = useState<'value_1' | 'value_2' | 'value_3'>('value_1');
   const [activityVariant, setActivityVariant] = useState<'v1' | 'v2' | 'v3'>('v1');
@@ -52,6 +53,7 @@ export function CommunityScreenNew({ className = '' }: CommunityScreenNewProps) 
   ];
 
   const activityTabs = [
+    { id: 'visual', label: 'Neighborhood Map' },
     { id: 'heatmap', label: 'Heat Map' },
     { id: 'recent', label: 'Recent Trades' }
   ];
@@ -250,7 +252,9 @@ export function CommunityScreenNew({ className = '' }: CommunityScreenNewProps) 
             />
           </div>
 
-          {activityTab === 'heatmap' ? (
+          {activityTab === 'visual' ? (
+            <NeighborhoodVisualGrid />
+          ) : activityTab === 'heatmap' ? (
             <div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
                 {heatMapData.map((cell, index) => (

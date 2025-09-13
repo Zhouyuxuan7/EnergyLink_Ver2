@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppButton } from '../design-system/AppButton';
 import { Card } from '../ui/card';
-import { Home, Zap, Users, DollarSign, Leaf, MapPin, CheckCircle, ArrowRight } from 'lucide-react';
+import { Home, Zap, Users, DollarSign, Leaf } from 'lucide-react';
 
 interface HomeScreenProps {
   onJoinForFree: () => void;
@@ -9,38 +9,10 @@ interface HomeScreenProps {
 
 export function HomeScreen({ onJoinForFree }: HomeScreenProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  const steps = [
-    {
-      number: 1,
-      title: 'Verify address',
-      description: 'Confirm your location to connect with nearby neighbors',
-      icon: <MapPin className="w-6 h-6" />
-    },
-    {
-      number: 2,
-      title: 'Set price/budget',
-      description: 'Configure your trading preferences and daily limits',
-      icon: <DollarSign className="w-6 h-6" />
-    },
-    {
-      number: 3,
-      title: 'Auto-trade',
-      description: 'Our system automatically finds compatible neighbors',
-      icon: <Zap className="w-6 h-6" />
-    },
-    {
-      number: 4,
-      title: 'Get receipts',
-      description: 'Track all trades with detailed transaction history',
-      icon: <CheckCircle className="w-6 h-6" />
-    }
-  ];
 
   return (
     <div className="min-h-screen content-clean">
@@ -119,75 +91,6 @@ export function HomeScreen({ onJoinForFree }: HomeScreenProps) {
         </div>
       </div>
 
-      {/* How it Works Section */}
-      <div className="content-section-lg section-energy-glow">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className={`text-3xl md:text-4xl font-semibold mb-4 transition-all duration-1000 delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-                style={{ color: 'var(--txt-heading)' }}>How it works</h2>
-            <p className={`text-lg md:text-xl transition-all duration-1000 delay-400 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-               style={{ color: 'var(--txt-primary)' }}>
-              Get started in minutes with our simple 4-step process
-            </p>
-          </div>
-
-          {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {steps.map((step, index) => (
-              <div 
-                key={step.number} 
-                className={`relative transition-all duration-1000 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${600 + index * 200}ms` }}
-                onMouseEnter={() => setHoveredStep(index)}
-                onMouseLeave={() => setHoveredStep(null)}
-              >
-                <div className={`content-clean p-6 text-center transition-all duration-300 ${
-                  hoveredStep === index ? 'transform scale-105' : 'hover:transform hover:scale-105'
-                }`}>
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 ${
-                    hoveredStep === index ? 'scale-110' : ''
-                  }`}
-                       style={{ 
-                         background: 'linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2))',
-                         boxShadow: hoveredStep === index ? 'var(--glow-cyan)' : 'var(--glow-teal)'
-                       }}>
-                    <span className="text-lg font-semibold" 
-                          style={{ color: 'var(--bg-page)' }}>{step.number}</span>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto transition-all duration-300 ${
-                      hoveredStep === index ? 'scale-110' : ''
-                    }`}
-                         style={{ backgroundColor: 'rgba(0, 245, 212, 0.1)' }}>
-                      <div className="icon-energy-teal">{step.icon}</div>
-                    </div>
-                    <h3 className="text-lg font-semibold" 
-                        style={{ color: 'var(--txt-heading)' }}>{step.title}</h3>
-                    <p className="text-sm" 
-                       style={{ color: 'var(--txt-primary)' }}>{step.description}</p>
-                  </div>
-                </div>
-
-                {/* Arrow for desktop */}
-                {index < steps.length - 1 && (
-                  <div className={`hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 transition-all duration-300 ${
-                    hoveredStep === index ? 'scale-110' : ''
-                  }`}>
-                    <ArrowRight className="w-6 h-6 icon-energy-cyan" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Benefits Section */}
       <div className="content-section-lg">
