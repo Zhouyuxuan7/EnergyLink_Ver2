@@ -1,0 +1,760 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary: #2E7D32;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #374151;
+  --muted: #f9fafb;
+  --muted-foreground: #6b7280;
+  --accent: #FFB300;
+  --accent-foreground: #111827;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --input: transparent;
+  --input-background: #f9fafb;
+  --switch-background: #d1d5db;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #2E7D32;
+  --chart-1: #2E7D32;
+  --chart-2: #FFB300;
+  --chart-3: #3b82f6;
+  --chart-4: #8b5cf6;
+  --chart-5: #ef4444;
+  --radius: 0.75rem;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --sidebar: #f9fafb;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #2E7D32;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #374151;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #2E7D32;
+}
+
+.dark {
+  /* FOUNDATION — HIGH-TECH ENERGY DESIGN TOKENS */
+  
+  /* Background Colors */
+  --bg-page: #0B0F14;
+  --bg-surface: #121820;
+  --glass-surface: rgba(18, 24, 32, 0.65);
+  
+  /* Typography Colors */
+  --txt-primary: #E5E7EB;
+  --txt-heading: #FFFFFF;
+  --txt-muted: #9CA3AF;
+  
+  /* Energy Accent Colors - UPDATED: Remove green success */
+  --accent-energy-1: #00F5D4;  /* teal glow */
+  --accent-energy-2: #2EF2FF;  /* cyan glow */
+  --accent-energy-3: #7DF9FF;  /* electric cyan */
+  --accent-warning: #FFB300;   /* amber */
+  --accent-success: #00F5D4;   /* Use teal instead of green for success states */
+  
+  /* Stroke & Glow */
+  --stroke-glow: linear-gradient(135deg, rgba(46, 242, 255, 0.2), rgba(0, 245, 212, 0.2));
+  
+  /* Gradients */
+  --grad-aurora-teal: linear-gradient(135deg, #001A1C 0%, #00383C 50%, #0B0F14 100%);
+  --grad-deep-cyan: linear-gradient(135deg, #06121A 0%, #0B2730 50%, #0B0F14 100%);
+  --grad-indigo-nebula: linear-gradient(135deg, #0D1B2A 0%, rgba(30, 58, 138, 0.25) 50%, #0B0F14 100%);
+  
+  /* Effects */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --glow-cyan: 0 0 16px rgba(46, 242, 255, 0.25);
+  --glow-teal: 0 0 14px rgba(0, 245, 212, 0.2);
+  
+  /* Legacy variables for backward compatibility */
+  --background: var(--bg-page);
+  --foreground: var(--txt-heading);
+  --card: var(--glass-surface);
+  --card-foreground: var(--txt-heading);
+  --popover: rgba(18, 24, 32, 0.9);
+  --popover-foreground: var(--txt-heading);
+  --primary: var(--accent-energy-1);
+  --primary-foreground: var(--bg-page);
+  --secondary: rgba(18, 24, 32, 0.4);
+  --secondary-foreground: var(--txt-primary);
+  --muted: rgba(18, 24, 32, 0.3);
+  --muted-foreground: var(--txt-muted);
+  --accent: var(--accent-energy-2);
+  --accent-foreground: var(--bg-page);
+  --destructive: #ef4444;
+  --destructive-foreground: var(--txt-heading);
+  --border: rgba(0, 245, 212, 0.2);
+  --input: var(--glass-surface);
+  --input-background: var(--glass-surface);
+  --switch-background: rgba(18, 24, 32, 0.5);
+  --ring: var(--accent-energy-1);
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --chart-1: var(--accent-energy-1);
+  --chart-2: var(--accent-energy-2);
+  --chart-3: var(--txt-heading);
+  --chart-4: rgba(255, 255, 255, 0.7);
+  --chart-5: var(--accent-energy-3);
+  --sidebar: var(--glass-surface);
+  --sidebar-foreground: var(--txt-heading);
+  --sidebar-primary: var(--accent-energy-1);
+  --sidebar-primary-foreground: var(--bg-page);
+  --sidebar-accent: rgba(18, 24, 32, 0.4);
+  --sidebar-accent-foreground: var(--txt-heading);
+  --sidebar-border: rgba(46, 242, 255, 0.2);
+  --sidebar-ring: var(--accent-energy-1);
+  --gold: #ffd700;
+  --silver: #c0c0c0;
+  --bronze: #cd7f32;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply text-foreground;
+    background: var(--bg-page);
+    background-image: var(--grad-aurora-teal);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* HIGH-TECH ENERGY COMPONENT SYSTEM */
+  
+  /* Dashboard Block - ONLY for Dashboard modules - UPDATED: 1px hairline stroke */
+  .dashboard-block {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid transparent;
+    background-image: 
+      linear-gradient(var(--glass-surface), var(--glass-surface)),
+      linear-gradient(135deg, rgba(46, 242, 255, 0.2), rgba(0, 245, 212, 0.2));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+    padding: 24px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dashboard-block:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-soft), var(--glow-cyan);
+  }
+
+  /* Primary Button - High-tech energy style */
+  .btn-energy-primary {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--accent-energy-1);
+    border-radius: 20px;
+    color: var(--txt-heading);
+    font-weight: var(--font-weight-medium);
+    padding: 12px 24px;
+    transition: all 0.2s ease-in-out;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-energy-primary:hover {
+    transform: scale(1.02);
+    box-shadow: var(--glow-teal);
+    border-color: var(--accent-energy-2);
+  }
+
+  /* Secondary Button */
+  .btn-energy-secondary {
+    background: transparent;
+    border: 1px solid var(--stroke-glow);
+    border-radius: 20px;
+    color: var(--txt-heading);
+    font-weight: var(--font-weight-medium);
+    padding: 12px 24px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-energy-secondary:hover {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transform: scale(1.02);
+  }
+
+  /* Energy Input */
+  .input-energy {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 245, 212, 0.2);
+    border-radius: 16px;
+    color: var(--txt-heading);
+    padding: 12px 16px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .input-energy:focus {
+    border-color: var(--accent-energy-1);
+    box-shadow: 0 0 0 2px rgba(0, 245, 212, 0.2);
+    outline: none;
+  }
+
+  .input-energy::placeholder {
+    color: var(--txt-muted);
+  }
+
+  /* Energy Tab System */
+  .tab-energy {
+    background: rgba(18, 24, 32, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 245, 212, 0.2);
+    border-radius: 20px;
+    color: var(--txt-primary);
+    padding: 8px 16px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .tab-energy.active {
+    background: linear-gradient(135deg, var(--accent-energy-2), var(--accent-energy-1));
+    color: var(--bg-page);
+    font-weight: var(--font-weight-medium);
+    box-shadow: var(--glow-cyan);
+  }
+
+  /* KPI Metric Styling */
+  .metric-energy-value {
+    color: var(--accent-energy-1);
+    font-weight: var(--font-weight-medium);
+    text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+  }
+
+  .metric-energy-label {
+    color: var(--txt-primary);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .metric-energy-secondary {
+    color: var(--txt-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Icon Glow Effects */
+  .icon-energy-white {
+    color: var(--txt-heading);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  }
+
+  .icon-energy-teal {
+    color: var(--accent-energy-1);
+    filter: drop-shadow(0 0 6px rgba(0, 245, 212, 0.6));
+  }
+
+  .icon-energy-cyan {
+    color: var(--accent-energy-2);
+    filter: drop-shadow(0 0 6px rgba(46, 242, 255, 0.6));
+  }
+
+  /* Gradient Text */
+  .text-energy-gradient {
+    background: linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hero Section Dark Glow */
+  .hero-energy-glow {
+    position: relative;
+    background: radial-gradient(ellipse 800px 600px at 50% 0%, rgba(0, 56, 60, 0.4) 0%, rgba(0, 245, 212, 0.1) 30%, transparent 70%);
+  }
+
+  .hero-energy-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse 600px 400px at 70% 20%, rgba(46, 242, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Section Background Glow */
+  .section-energy-glow {
+    background: radial-gradient(ellipse 600px 400px at center, rgba(13, 27, 42, 0.3) 0%, transparent 70%);
+  }
+
+  /* Heatmap Cells */
+  .heat-energy-low {
+    background: rgba(46, 242, 255, 0.25);
+    border: 1px solid rgba(46, 242, 255, 0.3);
+    box-shadow: 0 0 5px rgba(46, 242, 255, 0.1);
+  }
+
+  .heat-energy-medium {
+    background: rgba(0, 245, 212, 0.45);
+    border: 1px solid rgba(0, 245, 212, 0.5);
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+  }
+
+  .heat-energy-high {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Achievement Glows */
+  .medal-energy-gold {
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 60%);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  }
+
+  .medal-energy-silver {
+    background: radial-gradient(circle at center, rgba(192, 192, 192, 0.15) 0%, transparent 60%);
+    box-shadow: 0 0 12px rgba(192, 192, 192, 0.25);
+  }
+
+  .medal-energy-bronze {
+    background: radial-gradient(circle at center, rgba(205, 127, 50, 0.15) 0%, transparent 60%);
+    box-shadow: 0 0 12px rgba(205, 127, 50, 0.25);
+  }
+
+  /* Remove all glass effects from non-dashboard components */
+  .content-clean {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Override any remaining light backgrounds */
+  .bg-white:not(.dashboard-component),
+  .bg-gray-50:not(.dashboard-component),
+  .bg-gray-100:not(.dashboard-component),
+  .bg-slate-50:not(.dashboard-component) {
+    background: transparent !important;
+  }
+
+  /* LEGACY GLASS UTILITIES - Use energy system instead */
+  .glass-nav {
+    background: rgba(18, 24, 32, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(46, 242, 255, 0.2);
+  }
+
+  /* Legacy glow utilities - Use energy system instead */
+  .teal-glow {
+    color: var(--accent-energy-1);
+    text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+  }
+
+  .cyan-glow {
+    color: var(--accent-energy-2);
+    text-shadow: 0 0 10px rgba(46, 242, 255, 0.5);
+  }
+
+  .white-glow {
+    color: var(--txt-heading);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gold-glow {
+    color: var(--gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  }
+
+  .silver-glow {
+    color: var(--silver);
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.6);
+  }
+
+  .bronze-glow {
+    color: var(--bronze);
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.6);
+  }
+
+  /* CHART STYLING FOR ENERGY THEME */
+  .recharts-cartesian-grid line {
+    stroke: rgba(255, 255, 255, 0.1);
+  }
+
+  .recharts-cartesian-axis line,
+  .recharts-cartesian-axis-tick line {
+    stroke: rgba(255, 255, 255, 0.3);
+  }
+
+  .recharts-cartesian-axis-tick-value {
+    fill: var(--txt-primary);
+  }
+
+  .recharts-tooltip-wrapper {
+    background: var(--glass-surface) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--accent-energy-1);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* SHADCN COMPONENT OVERRIDES FOR ENERGY THEME */
+  [data-radix-collection-item],
+  .card,
+  .alert,
+  .dialog-content,
+  .popover-content,
+  .dropdown-menu-content,
+  .sheet-content,
+  .hover-card-content,
+  .toast {
+    background: var(--glass-surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid transparent;
+    background-image: 
+      linear-gradient(var(--glass-surface), var(--glass-surface)),
+      var(--stroke-glow);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: var(--shadow-soft);
+    border-radius: 24px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Energy button system */
+  .button {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--accent-energy-1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    color: var(--txt-heading);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .button:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), var(--glow-teal);
+    border-color: var(--accent-energy-2);
+    transform: scale(1.02);
+  }
+
+  /* Energy input system */
+  .input,
+  .textarea,
+  .select-trigger {
+    background: var(--glass-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 245, 212, 0.2);
+    border-radius: 16px;
+    color: var(--txt-heading);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .input:focus,
+  .textarea:focus,
+  .select-trigger:focus {
+    border-color: var(--accent-energy-1);
+    box-shadow: 0 0 0 2px rgba(0, 245, 212, 0.2);
+  }
+
+  /* Energy tab system */
+  .tabs-list .tabs-trigger {
+    background: rgba(18, 24, 32, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 245, 212, 0.2);
+    border-radius: 20px;
+    color: var(--txt-primary);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .tabs-list .tabs-trigger[data-state="active"] {
+    background: linear-gradient(135deg, var(--accent-energy-2), var(--accent-energy-1));
+    border-color: var(--accent-energy-1);
+    color: var(--bg-page);
+    font-weight: var(--font-weight-medium);
+    box-shadow: var(--glow-cyan);
+  }
+
+  /* CLEAN CONTENT SYSTEM - Remove glass from non-dashboard */
+  .content-clean {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Override light backgrounds */
+  .bg-white:not(.dashboard-component),
+  .bg-gray-50:not(.dashboard-component),
+  .bg-gray-100:not(.dashboard-component),
+  .bg-slate-50:not(.dashboard-component) {
+    background: transparent !important;
+  }
+
+  /* Remove light gradients */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br,
+  .bg-gradient-to-b,
+  .bg-gradient-radial,
+  .bg-gradient-to-t,
+  .bg-gradient-to-tl,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-bl,
+  .bg-gradient-to-l {
+    background: transparent !important;
+  }
+
+  /* Tailwind gradient overrides */
+  .from-white,
+  .from-gray-50,
+  .from-gray-100,
+  .to-white,
+  .to-gray-50,
+  .to-gray-100,
+  .via-white,
+  .via-gray-50,
+  .via-gray-100 {
+    --tw-gradient-from: transparent !important;
+    --tw-gradient-to: transparent !important;
+    --tw-gradient-via: transparent !important;
+  }
+
+  /* Content spacing utilities */
+  .content-section {
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+  }
+
+  .content-section-lg {
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+  }
+
+  /* Text color system overrides */
+  .text-black,
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700 {
+    color: var(--txt-heading) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-gray-600,
+  .text-gray-500 {
+    color: var(--txt-primary) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-gray-400,
+  .text-gray-300 {
+    color: var(--txt-muted) !important;
+  }
+
+  /* Legacy button styles for compatibility */
+  .btn-primary {
+    background: linear-gradient(135deg, rgba(0, 245, 212, 0.3), rgba(46, 242, 255, 0.3));
+    border: 1px solid var(--accent-energy-1);
+    color: var(--txt-heading);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-secondary {
+    background: var(--glass-surface);
+    border: 1px solid var(--accent-energy-1);
+    color: var(--txt-heading);
+    backdrop-filter: blur(20px);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent-energy-1);
+    color: var(--accent-energy-1);
+    text-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    h5 {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    h6 {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--txt-heading);
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+      color: var(--txt-primary);
+    }
+
+    span {
+      color: var(--txt-primary);
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--txt-heading);
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--txt-heading);
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      color: var(--txt-heading);
+    }
+
+    input::placeholder {
+      color: var(--txt-muted);
+    }
+
+    /* Ensure proper text colors for common elements */
+    div, section, article, aside, nav, main, header, footer {
+      color: inherit;
+    }
+
+    /* Links with energy glow */
+    a {
+      color: var(--txt-heading);
+      transition: all 0.2s ease-in-out;
+    }
+
+    a:hover {
+      color: var(--accent-energy-1);
+      text-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+    }
+
+    /* Small text elements */
+    small, .text-sm {
+      color: var(--txt-muted);
+    }
+
+    /* Strong emphasis */
+    strong, b {
+      color: var(--txt-heading);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
