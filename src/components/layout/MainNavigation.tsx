@@ -7,9 +7,10 @@ interface MainNavigationProps {
   onNavigate: (screen: string) => void;
   showAuthSection?: boolean;
   isLoggedIn?: boolean;
+  onJoinForFree?: () => void;
 }
 
-export function MainNavigation({ currentScreen, onNavigate, showAuthSection = true, isLoggedIn = false }: MainNavigationProps) {
+export function MainNavigation({ currentScreen, onNavigate, showAuthSection = true, isLoggedIn = false, onJoinForFree }: MainNavigationProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const navItems = [
@@ -72,20 +73,12 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
                   Go to Dashboard
                 </AppButton>
               ) : (
-                <>
-                  <AppButton
-                    variant="tertiary"
-                    onClick={() => onNavigate('login')}
-                  >
-                    Log in
-                  </AppButton>
-                  <AppButton
-                    variant="primary"
-                    onClick={() => onNavigate('signup')}
-                  >
-                    Join for Free
-                  </AppButton>
-                </>
+                <AppButton
+                  variant="primary"
+                  onClick={onJoinForFree}
+                >
+                  Join for Free
+                </AppButton>
               )}
             </div>
           )}
@@ -144,28 +137,16 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
                       Go to Dashboard
                     </AppButton>
                   ) : (
-                    <>
-                      <AppButton
-                        variant="tertiary"
-                        onClick={() => {
-                          onNavigate('login');
-                          setShowMobileMenu(false);
-                        }}
-                        className="w-full"
-                      >
-                        Log in
-                      </AppButton>
-                      <AppButton
-                        variant="primary"
-                        onClick={() => {
-                          onNavigate('signup');
-                          setShowMobileMenu(false);
-                        }}
-                        className="w-full"
-                      >
-                        Join for Free
-                      </AppButton>
-                    </>
+                    <AppButton
+                      variant="primary"
+                      onClick={() => {
+                        onJoinForFree?.();
+                        setShowMobileMenu(false);
+                      }}
+                      className="w-full"
+                    >
+                      Join for Free
+                    </AppButton>
                   )}
                 </div>
               )}

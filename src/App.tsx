@@ -6,8 +6,6 @@ import { HomeScreen } from './components/screens/HomeScreen';
 import { HowItWorksScreen } from './components/screens/HowItWorksScreen';
 import { ImpactScreen } from './components/screens/ImpactScreen';
 import { LoginScreen } from './components/screens/LoginScreen';
-import { SignupScreen } from './components/screens/SignupScreen';
-import { VerificationScreen } from './components/screens/VerificationScreen';
 import { PriceBandScreenDesktop } from './components/screens/PriceBandScreenDesktop';
 import { DashboardScreen } from './components/screens/DashboardScreen';
 import { TradeReceiptScreenDesktop } from './components/screens/TradeReceiptScreenDesktop';
@@ -18,7 +16,7 @@ import { StyleGuideScreen } from './components/screens/StyleGuideScreen';
 import { MainNavigation } from './components/layout/MainNavigation';
 import { TopNavigation } from './components/layout/TopNavigation';
 
-type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'login' | 'signup' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components' | 'style-guide';
+type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components' | 'style-guide';
 type Role = 'seller' | 'buyer' | null;
 
 export default function App() {
@@ -29,12 +27,7 @@ export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [autoTradeEnabled, setAutoTradeEnabled] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [signupData, setSignupData] = useState<{
-    role: 'seller' | 'buyer';
-    email: string;
-    phone: string;
-    verifyBy: 'email' | 'sms';
-  } | null>(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const navigate = (screen: Screen) => {
     setIsTransitioning(true);
@@ -45,31 +38,22 @@ export default function App() {
   };
 
   const handleJoinForFree = () => {
-    navigate('signup');
+    setShowLoginPopup(true);
   };
 
   const handleLoginSuccess = (role: 'seller' | 'buyer') => {
     setUserRole(role);
     setIsLoggedIn(true);
+    setShowLoginPopup(false);
     setCurrentScreen('dashboard');
   };
 
   const handleSignOut = () => {
     setUserRole(null);
     setIsLoggedIn(false);
-    setSignupData(null);
     setCurrentScreen('home');
   };
 
-  const handleSignupComplete = (data: { role: 'seller' | 'buyer'; email: string; phone: string; verifyBy: 'email' | 'sms' }) => {
-    setSignupData(data);
-    setUserRole(data.role);
-    navigate('verification');
-  };
-
-  const handleVerified = () => {
-    navigate('priceband');
-  };
 
   const handleTradeClick = (trade: any) => {
     setSelectedTrade(trade);
@@ -78,7 +62,7 @@ export default function App() {
 
   // Navigation visibility logic
   const isPublicScreen = ['home', 'how-it-works', 'impact', 'style-guide'].includes(currentScreen);
-  const isAuthScreen = ['login', 'signup', 'verification', 'priceband'].includes(currentScreen);
+  const isAuthScreen = ['verification', 'priceband'].includes(currentScreen);
   const isProtectedScreen = ['dashboard', 'receipt', 'settings', 'community'].includes(currentScreen);
   
   const showMainNav = isPublicScreen || (isAuthScreen && !isLoggedIn);
@@ -86,16 +70,14 @@ export default function App() {
   const showAuthSection = isPublicScreen || (isAuthScreen && !isLoggedIn);
 
   const renderScreen = () => {
-    // Only redirect if we're not in the middle of a login process
     // Redirect to home if trying to access protected screens without auth
-    if (isProtectedScreen && !isLoggedIn && currentScreen !== 'login') {
+    if (isProtectedScreen && !isLoggedIn) {
       navigate('home');
       return null;
     }
 
     // Redirect to dashboard if trying to access auth screens while logged in
-    // But not if we just logged in (to avoid redirect loops)
-    if (isAuthScreen && isLoggedIn && currentScreen !== 'login') {
+    if (isAuthScreen && isLoggedIn) {
       navigate('dashboard');
       return null;
     }
@@ -111,21 +93,7 @@ export default function App() {
         case 'impact':
           return <ImpactScreen onJoinForFree={handleJoinForFree} />;
         
-        case 'login':
-          return <LoginScreen onLoginSuccess={handleLoginSuccess} />;
         
-        case 'signup':
-          return <SignupScreen onComplete={handleSignupComplete} />;
-        
-        case 'verification':
-          return signupData ? (
-            <VerificationScreen
-              verifyBy={signupData.verifyBy}
-              email={signupData.email}
-              phone={signupData.phone}
-              onVerified={handleVerified}
-            />
-          ) : null;
         
         case 'priceband':
           return (
@@ -198,6 +166,7 @@ export default function App() {
           onNavigate={navigate}
           showAuthSection={showAuthSection}
           isLoggedIn={isLoggedIn}
+          onJoinForFree={handleJoinForFree}
         />
       )}
       {showTopNav && (
@@ -211,6 +180,15 @@ export default function App() {
         />
       )}
       {renderScreen()}
+      
+      {/* Login Popup */}
+      {showLoginPopup && (
+        <LoginScreen 
+          onLoginSuccess={handleLoginSuccess}
+          onClose={() => setShowLoginPopup(false)}
+        />
+      )}
+      
       <Toaster />
     </div>
   );
