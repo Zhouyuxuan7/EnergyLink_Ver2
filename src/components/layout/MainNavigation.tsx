@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { AppButton } from '../design-system/AppButton';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import { AppInput } from '../design-system/AppInput';
 import { Menu, X, Zap } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
 
 interface MainNavigationProps {
   currentScreen: string;
@@ -12,38 +9,30 @@ interface MainNavigationProps {
 }
 
 export function MainNavigation({ currentScreen, onNavigate, showAuthSection = true }: MainNavigationProps) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
 
   const navItems = [
     { id: 'home', label: 'Home' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'how-it-works', label: 'How it works' },
-    { id: 'community', label: 'Community' },
+    { id: 'how-it-works', label: 'How It Works' },
+    { id: 'impact', label: 'Impact' },
+    { id: 'style-guide', label: 'Style Guide' },
   ];
 
-  const handleLogin = () => {
-    if (loginForm.email && loginForm.password) {
-      toast.success("Logged in successfully!");
-      setShowLoginModal(false);
-      setLoginForm({ email: '', password: '' });
-    }
-  };
+
 
   const EnergyLinkLogo = () => (
     <div className="flex items-center space-x-3">
       <div className="flex items-center space-x-1">
-        <Zap className="w-7 h-7 text-[#2E7D32]" strokeWidth={1.5} />
+        <Zap className="w-7 h-7 icon-energy-teal" strokeWidth={1.5} />
       </div>
-      <span className="text-2xl font-bold text-gray-900">EnergyLink</span>
+      <span className="text-2xl font-semibold text-energy-gradient">EnergyLink</span>
     </div>
   );
 
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:block bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+      <nav className="hidden md:block glass-nav px-6 py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => onNavigate('home')} className="flex items-center">
@@ -59,10 +48,10 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id)}
-                  className={`px-4 py-2 rounded-lg transition-colors font-medium ${
+                  className={`px-4 py-2 rounded-lg transition-all font-medium ${
                     isActive 
-                      ? 'bg-[#2E7D32] text-white' 
-                      : 'text-gray-600 hover:text-[#2E7D32] hover:bg-gray-50'
+                      ? 'tab-energy active' 
+                      : 'tab-energy'
                   }`}
                 >
                   {item.label}
@@ -76,7 +65,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
             <div className="flex items-center space-x-4">
               <AppButton
                 variant="tertiary"
-                onClick={() => setShowLoginModal(true)}
+                onClick={() => onNavigate('login')}
               >
                 Log in
               </AppButton>
@@ -92,13 +81,13 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
       </nav>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-50">
+      <nav className="md:hidden glass-nav px-4 py-3 sticky top-0 z-50">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => onNavigate('home')} className="flex items-center">
             <div className="flex items-center space-x-2">
-              <Zap className="w-6 h-6 text-[#2E7D32]" strokeWidth={1.5} />
-              <span className="text-xl font-bold text-gray-900">EnergyLink</span>
+              <Zap className="w-6 h-6 icon-energy-teal" strokeWidth={1.5} />
+              <span className="text-xl font-semibold text-energy-gradient">EnergyLink</span>
             </div>
           </button>
 
@@ -113,7 +102,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
 
         {/* Mobile Menu Overlay */}
         {showMobileMenu && (
-          <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+          <div className="absolute top-full left-0 right-0 glass-nav shadow-lg">
             <div className="p-4 space-y-3">
               {navItems.map((item) => (
                 <button
@@ -122,18 +111,19 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
                     onNavigate(item.id);
                     setShowMobileMenu(false);
                   }}
-                  className="block w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                  className="block w-full text-left px-4 py-3 rounded-lg font-medium transition-all hover:bg-glass-surface"
+                  style={{ color: 'var(--txt-primary)' }}
                 >
                   {item.label}
                 </button>
               ))}
               
               {showAuthSection && (
-                <div className="border-t border-gray-200 pt-3 space-y-2">
+                <div className="border-t pt-3 space-y-2" style={{ borderColor: 'rgba(0, 245, 212, 0.2)' }}>
                   <AppButton
                     variant="tertiary"
                     onClick={() => {
-                      setShowLoginModal(true);
+                      onNavigate('login');
                       setShowMobileMenu(false);
                     }}
                     className="w-full"
@@ -157,61 +147,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
         )}
       </nav>
 
-      {/* Login Modal */}
-      <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-center">Log in to EnergyLink</DialogTitle>
-          </DialogHeader>
-          
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <AppInput
-                type="email"
-                label="Email"
-                value={loginForm.email}
-                onChange={(value) => setLoginForm(prev => ({ ...prev, email: value }))}
-                placeholder="your@email.com"
-              />
-              
-              <AppInput
-                type="password"
-                label="Password"
-                value={loginForm.password}
-                onChange={(value) => setLoginForm(prev => ({ ...prev, password: value }))}
-                placeholder="••••••••"
-              />
-            </div>
 
-            <div className="text-center">
-              <button 
-                className="text-[#2E7D32] font-medium hover:underline"
-                onClick={() => toast.info("Password reset link sent to your email")}
-              >
-                Forgot password?
-              </button>
-            </div>
-
-            <div className="flex space-x-3">
-              <AppButton
-                variant="secondary"
-                onClick={() => setShowLoginModal(false)}
-                className="flex-1"
-              >
-                Cancel
-              </AppButton>
-              <AppButton
-                variant="primary"
-                onClick={handleLogin}
-                disabled={!loginForm.email || !loginForm.password}
-                className="flex-1"
-              >
-                Log in
-              </AppButton>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }

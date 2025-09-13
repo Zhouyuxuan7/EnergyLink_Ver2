@@ -98,52 +98,51 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen content-clean">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-green-50 via-white to-amber-50 py-12 md:py-20">
+      <div className="hero-energy-glow py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              How <span className="text-[#2E7D32]">EnergyLink</span> works
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6" 
+                style={{ color: 'var(--txt-heading)' }}>
+              How <span className="text-energy-gradient">EnergyLink</span> works
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8" 
+               style={{ color: 'var(--txt-primary)' }}>
               Join thousands of neighbors already trading solar energy directly with each other. 
               Get started in minutes with our simple, automated system.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <AppButton
-                variant="primary"
-                size="lg"
-                icon={<Zap className="w-5 h-5" />}
+              <button
+                className="btn-energy-primary px-8 py-4 text-lg"
                 onClick={onJoinForFree}
-                className="px-8"
               >
+                <Zap className="w-5 h-5 mr-2 icon-energy-white" />
                 Join for Free
-              </AppButton>
+              </button>
               
-              <AppButton
-                variant="tertiary"
-                size="lg"
-                icon={<Play className="w-5 h-5" />}
+              <button
+                className="btn-energy-secondary px-6 py-4 text-lg"
                 onClick={() => setShowExplainerModal(true)}
-                className="px-6"
               >
+                <Play className="w-5 h-5 mr-2 icon-energy-white" />
                 Watch 60-sec explainer
-              </AppButton>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       {/* Steps Section */}
-      <div className="bg-white py-12 md:py-20">
+      <div className="content-section-lg">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4" 
+                style={{ color: 'var(--txt-heading)' }}>
               Simple 4-step process
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg" style={{ color: 'var(--txt-primary)' }}>
               From signup to your first trade in under 10 minutes
             </p>
           </div>
@@ -154,21 +153,28 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
                 {/* Content */}
                 <div className="flex-1 space-y-6">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-[#2E7D32] rounded-full flex items-center justify-center">
-                      <span className="text-lg font-bold text-white">{step.number}</span>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center"
+                         style={{ 
+                           background: 'linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2))',
+                           boxShadow: 'var(--glow-teal)'
+                         }}>
+                      <span className="text-lg font-semibold" 
+                            style={{ color: 'var(--bg-page)' }}>{step.number}</span>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{step.title}</h3>
+                    <h3 className="text-2xl md:text-3xl font-semibold" 
+                        style={{ color: 'var(--txt-heading)' }}>{step.title}</h3>
                   </div>
                   
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg leading-relaxed" 
+                     style={{ color: 'var(--txt-primary)' }}>
                     {step.description}
                   </p>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {step.details.map((detail) => (
                       <div key={detail} className="flex items-center space-x-3">
-                        <CheckCircle className="w-5 h-5 text-[#2E7D32] flex-shrink-0" />
-                        <span className="text-gray-700">{detail}</span>
+                        <CheckCircle className="w-5 h-5 icon-energy-teal flex-shrink-0" />
+                        <span style={{ color: 'var(--txt-primary)' }}>{detail}</span>
                       </div>
                     ))}
                   </div>
@@ -176,13 +182,17 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
 
                 {/* Visual */}
                 <div className="flex-1 max-w-md">
-                  <Card className="p-8 bg-gradient-to-br from-green-50 to-blue-50">
+                  <div className="p-8 section-energy-glow rounded-2xl">
                     <div className="aspect-square flex items-center justify-center">
-                      <div className="w-24 h-24 bg-[#2E7D32] rounded-2xl flex items-center justify-center text-white">
-                        {step.icon}
+                      <div className="w-24 h-24 rounded-2xl flex items-center justify-center"
+                           style={{ 
+                             background: 'linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2))',
+                             boxShadow: 'var(--glow-cyan)'
+                           }}>
+                        <div className="icon-energy-white">{step.icon}</div>
                       </div>
                     </div>
-                  </Card>
+                  </div>
                 </div>
               </div>
             ))}
@@ -191,127 +201,132 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
       </div>
 
       {/* Benefits Section */}
-      <div className="bg-gray-50 py-12 md:py-20">
+      <div className="content-section-lg section-energy-glow">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4" 
+                style={{ color: 'var(--txt-heading)' }}>
               Why choose peer-to-peer energy?
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg" style={{ color: 'var(--txt-primary)' }}>
               More than just savings – build stronger, more sustainable communities
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {benefits.map((benefit) => (
-              <Card key={benefit.title} className="p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4 text-[#2E7D32]">
-                  {benefit.icon}
+              <div key={benefit.title} className="content-clean p-6 text-center transition-all duration-200 hover:transform hover:scale-105">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4"
+                     style={{ backgroundColor: 'rgba(0, 245, 212, 0.1)' }}>
+                  <div className="icon-energy-teal">{benefit.icon}</div>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600 text-sm">{benefit.description}</p>
-              </Card>
+                <h3 className="font-semibold mb-3" style={{ color: 'var(--txt-heading)' }}>{benefit.title}</h3>
+                <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>{benefit.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </div>
 
       {/* Use Cases Section */}
-      <div className="bg-white py-12 md:py-20">
+      <div className="content-section-lg">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4" 
+                style={{ color: 'var(--txt-heading)' }}>
               Perfect for every neighbor
             </h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Solar Owners */}
-            <Card className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200">
+            <div className="content-clean p-8 rounded-2xl section-energy-glow">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                  <Sun className="w-6 h-6 text-amber-600" />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center"
+                     style={{ backgroundColor: 'rgba(255, 179, 0, 0.1)' }}>
+                  <Sun className="w-6 h-6" style={{ color: 'var(--accent-warning)' }} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Solar Owners</h3>
+                <h3 className="text-2xl font-semibold" style={{ color: 'var(--txt-heading)' }}>Solar Owners</h3>
               </div>
               
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p style={{ color: 'var(--txt-primary)' }}>
                   Turn your rooftop solar into a neighborhood energy business. Earn 2-3x more than utility buyback rates 
                   while helping neighbors access clean energy.
                 </p>
                 
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-amber-600" />
-                    <span className="text-sm text-gray-700">Earn $0.12-$0.16/kWh vs $0.06 utility rate</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Earn $0.12-$0.16/kWh vs $0.06 utility rate</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-amber-600" />
-                    <span className="text-sm text-gray-700">Set your own minimum prices and daily limits</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Set your own minimum prices and daily limits</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-amber-600" />
-                    <span className="text-sm text-gray-700">Automatic matching with nearby buyers</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Automatic matching with nearby buyers</span>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Energy Buyers */}
-            <Card className="p-8 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+            <div className="content-clean p-8 rounded-2xl section-energy-glow">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                  <Home className="w-6 h-6 text-green-600" />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center"
+                     style={{ backgroundColor: 'rgba(0, 245, 212, 0.1)' }}>
+                  <Home className="w-6 h-6 icon-energy-teal" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Energy Buyers</h3>
+                <h3 className="text-2xl font-semibold" style={{ color: 'var(--txt-heading)' }}>Energy Buyers</h3>
               </div>
               
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p style={{ color: 'var(--txt-primary)' }}>
                   Access clean, local solar energy at better prices than your utility. Support your neighbors while 
                   reducing your carbon footprint and electricity bills.
                 </p>
                 
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-green-600" />
-                    <span className="text-sm text-gray-700">Pay $0.12-$0.16/kWh vs $0.20 utility rate</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Pay $0.12-$0.16/kWh vs $0.20 utility rate</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-green-600" />
-                    <span className="text-sm text-gray-700">Set maximum price and daily budget limits</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Set maximum price and daily budget limits</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <ArrowRight className="w-4 h-4 text-green-600" />
-                    <span className="text-sm text-gray-700">Support renewable energy in your neighborhood</span>
+                    <ArrowRight className="w-4 h-4 icon-energy-cyan" />
+                    <span className="text-sm" style={{ color: 'var(--txt-primary)' }}>Support renewable energy in your neighborhood</span>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="bg-[#2E7D32] py-12 md:py-20">
+      <div className="content-section-lg hero-energy-glow">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6" 
+              style={{ color: 'var(--txt-heading)' }}>
             Ready to start trading energy with your neighbors?
           </h2>
-          <p className="text-lg md:text-xl text-green-100 mb-8">
+          <p className="text-lg md:text-xl mb-8" 
+             style={{ color: 'var(--txt-primary)' }}>
             Join thousands of neighbors already building more sustainable, resilient communities through energy sharing.
           </p>
           
-          <AppButton
-            variant="secondary"
-            size="lg"
-            icon={<Zap className="w-5 h-5" />}
+          <button
+            className="btn-energy-primary px-8 py-4 text-lg"
             onClick={onJoinForFree}
-            className="px-8 bg-white text-[#2E7D32] hover:bg-gray-50"
           >
+            <Zap className="w-5 h-5 mr-2 icon-energy-white" />
             Join for Free
-          </AppButton>
+          </button>
         </div>
       </div>
 

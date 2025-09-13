@@ -13,10 +13,16 @@ interface BaseInputProps {
 }
 
 interface TextInputProps extends BaseInputProps {
-  type: 'text';
+  type: 'text' | 'email' | 'password' | 'tel' | 'number' | 'time';
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  icon?: React.ReactNode;
+  required?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+  onBlur?: () => void;
 }
 
 interface NumberStepperProps extends BaseInputProps {
@@ -53,13 +59,35 @@ export function AppInput(props: AppInputProps) {
   const renderInput = () => {
     switch (props.type) {
       case 'text':
+      case 'email':
+      case 'password':
+      case 'tel':
+      case 'number':
+      case 'time':
         return (
-          <Input
-            value={props.value}
-            onChange={(e) => props.onChange(e.target.value)}
-            placeholder={props.placeholder}
-            className={cn("min-h-[44px]", error && "border-red-500")}
-          />
+          <div className="relative">
+            {props.icon && (
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                {props.icon}
+              </div>
+            )}
+            <Input
+              type={props.type}
+              value={props.value}
+              onChange={(e) => props.onChange(e.target.value)}
+              onBlur={props.onBlur}
+              placeholder={props.placeholder}
+              required={props.required}
+              min={props.min}
+              max={props.max}
+              step={props.step}
+              className={cn(
+                "min-h-[44px]", 
+                props.icon && "pl-10",
+                error && "border-red-500"
+              )}
+            />
+          </div>
         );
 
       case 'number-stepper':

@@ -6,14 +6,16 @@ import { Progress } from '../ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { DeleteAccountModal } from '../common/DeleteAccountModal';
+import { ThemeToggle } from '../stock/ThemeToggle';
 import { Download, Trash2, Settings, Shield, DollarSign, FileText, Bell } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 interface SettingsScreenDesktopProps {
-  // No props needed for this component
+  isDarkMode?: boolean;
+  onThemeToggle?: () => void;
 }
 
-export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
+export function SettingsScreenDesktop({ isDarkMode = false, onThemeToggle }: SettingsScreenDesktopProps) {
   const [quietHours, setQuietHours] = useState(true);
   const [sameBlockFirst, setSameBlockFirst] = useState(true);
   const [notifications, setNotifications] = useState(true);
@@ -50,12 +52,12 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen content-clean">
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
-          <p className="text-lg text-gray-600">Manage your trading preferences, privacy, and account settings</p>
+          <h1 className="text-3xl font-semibold mb-2" style={{ color: 'var(--txt-heading)' }}>Settings</h1>
+          <p className="text-lg" style={{ color: 'var(--txt-primary)' }}>Manage your trading preferences, privacy, and account settings</p>
         </div>
 
         <div className="grid grid-cols-12 gap-8">
@@ -82,16 +84,16 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
               </TabsList>
 
               <TabsContent value="trading" className="space-y-6">
-                <Card className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Trading Preferences</h3>
+                <div className="dashboard-block">
+                  <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--txt-heading)' }}>Trading Preferences</h3>
                   
                   <div className="grid grid-cols-2 gap-8">
                     <div className="space-y-6">
                       <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div className="flex items-center justify-between p-4 rounded-lg dashboard-block">
                           <div>
-                            <p className="font-medium text-gray-900">Quiet hours</p>
-                            <p className="text-sm text-gray-600">Pause all trading 9pm–7am daily</p>
+                            <p className="font-medium" style={{ color: 'var(--txt-heading)' }}>Quiet hours</p>
+                            <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>Pause all trading 9pm–7am daily</p>
                           </div>
                           <AppInput
                             type="toggle"
@@ -100,10 +102,10 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                           />
                         </div>
 
-                        <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div className="flex items-center justify-between p-4 rounded-lg dashboard-block">
                           <div>
-                            <p className="font-medium text-gray-900">Same block priority</p>
-                            <p className="text-sm text-gray-600">Match with immediate neighbors first</p>
+                            <p className="font-medium" style={{ color: 'var(--txt-heading)' }}>Same block priority</p>
+                            <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>Match with immediate neighbors first</p>
                           </div>
                           <AppInput
                             type="toggle"
@@ -112,10 +114,10 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                           />
                         </div>
 
-                        <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div className="flex items-center justify-between p-4 rounded-lg dashboard-block">
                           <div>
-                            <p className="font-medium text-gray-900">Push notifications</p>
-                            <p className="text-sm text-gray-600">Trade confirmations and important alerts</p>
+                            <p className="font-medium" style={{ color: 'var(--txt-heading)' }}>Push notifications</p>
+                            <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>Trade confirmations and important alerts</p>
                           </div>
                           <AppInput
                             type="toggle"
@@ -126,15 +128,15 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       </div>
                     </div>
 
-                    <div className="bg-blue-50 p-6 rounded-xl">
+                    <div className="dashboard-block">
                       <div className="flex items-center space-x-3 mb-4">
-                        <Bell className="w-6 h-6 text-blue-600" />
-                        <h4 className="font-semibold text-blue-900">Notification Settings</h4>
+                        <Bell className="w-6 h-6 icon-energy-cyan" />
+                        <h4 className="font-semibold" style={{ color: 'var(--txt-heading)' }}>Notification Settings</h4>
                       </div>
                       <div className="space-y-3 text-sm">
                         <label className="flex items-center space-x-2">
                           <input type="checkbox" defaultChecked className="rounded" />
-                          <span className="text-blue-800">Trade completions</span>
+                          <span style={{ color: 'var(--txt-primary)' }}>Trade completions</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input type="checkbox" defaultChecked className="rounded" />
@@ -155,19 +157,19 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </TabsContent>
 
               <TabsContent value="privacy" className="space-y-6">
-                <Card className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Privacy & Security</h3>
+                <div className="dashboard-block">
+                  <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--txt-heading)' }}>Privacy & Security</h3>
                   
                   <div className="grid grid-cols-2 gap-8">
                     <div className="space-y-6">
-                      <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                      <div className="flex items-center justify-between p-4 rounded-lg dashboard-block">
                         <div>
-                          <p className="font-medium text-gray-900">Limited profile visibility</p>
-                          <p className="text-sm text-gray-600">Show only first name + street to neighbors</p>
+                          <p className="font-medium" style={{ color: 'var(--txt-heading)' }}>Limited profile visibility</p>
+                          <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>Show only first name + street to neighbors</p>
                         </div>
                         <AppInput
                           type="toggle"
@@ -177,15 +179,15 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       </div>
 
                       <div className="space-y-4">
-                        <h4 className="font-medium text-gray-900">What neighbors can see:</h4>
+                        <h4 className="font-medium" style={{ color: 'var(--txt-heading)' }}>What neighbors can see:</h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
-                            <span className="text-gray-600">First name:</span>
-                            <span className="font-medium">✓ Visible</span>
+                            <span style={{ color: 'var(--txt-primary)' }}>First name:</span>
+                            <span className="font-medium metric-energy-value">✓ Visible</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Street name:</span>
-                            <span className="font-medium">✓ Visible</span>
+                            <span style={{ color: 'var(--txt-primary)' }}>Street name:</span>
+                            <span className="font-medium metric-energy-value">✓ Visible</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Exact address:</span>
@@ -232,12 +234,12 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </TabsContent>
 
               <TabsContent value="budget" className="space-y-6">
-                <Card className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Budget Controls</h3>
+                <div className="dashboard-block">
+                  <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--txt-heading)' }}>Budget Controls</h3>
                   
                   <div className="grid grid-cols-2 gap-8">
                     <div className="space-y-6">
@@ -301,12 +303,12 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       Save
                     </AppButton>
                   </div>
-                </Card>
+                </div>
               </TabsContent>
 
               <TabsContent value="data" className="space-y-6">
-                <Card className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Data Export & Management</h3>
+                <div className="dashboard-block">
+                  <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--txt-heading)' }}>Data Export & Management</h3>
                   
                   <div className="space-y-6">
                     <div>
@@ -373,7 +375,50 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="appearance" className="space-y-6">
+                <div className="dashboard-block">
+                  <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--txt-heading)' }}>Appearance & Theme</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                      <div>
+                        <p className="font-medium text-gray-900">Dark Mode</p>
+                        <p className="text-sm text-gray-600">Switch between light and dark themes</p>
+                      </div>
+                      {onThemeToggle && (
+                        <ThemeToggle 
+                          isDark={isDarkMode}
+                          onToggle={onThemeToggle}
+                          size="lg"
+                        />
+                      )}
+                    </div>
+                    
+                    <div className="bg-blue-50 p-6 rounded-xl">
+                      <div className="flex items-center space-x-3 mb-4">
+                        <Bell className="w-6 h-6 text-blue-600" />
+                        <h4 className="font-semibold text-blue-900">Theme Preferences</h4>
+                      </div>
+                      <div className="space-y-3 text-sm text-blue-800">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span>Dark mode applies to all screens after login</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span>Settings are saved locally to your device</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span>Changes take effect immediately</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
@@ -381,31 +426,31 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
           {/* Sidebar */}
           <div className="col-span-4 space-y-6">
             {/* Account Summary */}
-            <Card className="p-6 bg-gradient-to-br from-[#2E7D32] to-green-600 text-white">
-              <h4 className="font-semibold mb-4">Account Summary</h4>
+            <div className="dashboard-block hero-energy-glow">
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--txt-heading)' }}>Account Summary</h4>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="opacity-90">Member since:</span>
-                  <span className="font-medium">Oct 2024</span>
+                  <span style={{ color: 'var(--txt-primary)', opacity: 0.9 }}>Member since:</span>
+                  <span className="font-medium metric-energy-value">Oct 2024</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="opacity-90">Total trades:</span>
-                  <span className="font-medium">145</span>
+                  <span style={{ color: 'var(--txt-primary)', opacity: 0.9 }}>Total trades:</span>
+                  <span className="font-medium metric-energy-value">145</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="opacity-90">Energy traded:</span>
-                  <span className="font-medium">249.8 kWh</span>
+                  <span style={{ color: 'var(--txt-primary)', opacity: 0.9 }}>Energy traded:</span>
+                  <span className="font-medium metric-energy-value">249.8 kWh</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="opacity-90">CO₂ avoided:</span>
-                  <span className="font-medium">172.4 kg</span>
+                  <span style={{ color: 'var(--txt-primary)', opacity: 0.9 }}>CO₂ avoided:</span>
+                  <span className="font-medium metric-energy-value">172.4 kg</span>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Quick Actions */}
-            <Card className="p-6">
-              <h4 className="font-semibold text-gray-900 mb-4">Quick Actions</h4>
+            <div className="dashboard-block">
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--txt-heading)' }}>Quick Actions</h4>
               <div className="space-y-3">
                 <AppButton variant="secondary" size="sm" className="w-full justify-start">
                   Download all data
@@ -420,12 +465,12 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                   Contact support
                 </AppButton>
               </div>
-            </Card>
+            </div>
 
             {/* Support */}
-            <Card className="p-6 bg-blue-50 border-blue-200">
-              <h4 className="font-semibold text-blue-900 mb-4">Need Help?</h4>
-              <div className="space-y-3 text-sm text-blue-800">
+            <div className="dashboard-block section-energy-glow">
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--txt-heading)' }}>Need Help?</h4>
+              <div className="space-y-3 text-sm" style={{ color: 'var(--txt-primary)' }}>
                 <p>Our support team is here to help with any questions about your account or trading preferences.</p>
                 <div className="space-y-2">
                   <p><strong>Email:</strong> support@energylink.com</p>
@@ -433,7 +478,7 @@ export function SettingsScreenDesktop({}: SettingsScreenDesktopProps) {
                   <p><strong>Response time:</strong> Within 24 hours</p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
