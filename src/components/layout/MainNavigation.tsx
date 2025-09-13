@@ -6,9 +6,10 @@ interface MainNavigationProps {
   currentScreen: string;
   onNavigate: (screen: string) => void;
   showAuthSection?: boolean;
+  isLoggedIn?: boolean;
 }
 
-export function MainNavigation({ currentScreen, onNavigate, showAuthSection = true }: MainNavigationProps) {
+export function MainNavigation({ currentScreen, onNavigate, showAuthSection = true, isLoggedIn = false }: MainNavigationProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const navItems = [
@@ -63,18 +64,29 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
           {/* Right Section */}
           {showAuthSection && (
             <div className="flex items-center space-x-4">
-              <AppButton
-                variant="tertiary"
-                onClick={() => onNavigate('login')}
-              >
-                Log in
-              </AppButton>
-              <AppButton
-                variant="primary"
-                onClick={() => onNavigate('signup')}
-              >
-                Join for Free
-              </AppButton>
+              {isLoggedIn ? (
+                <AppButton
+                  variant="primary"
+                  onClick={() => onNavigate('dashboard')}
+                >
+                  Go to Dashboard
+                </AppButton>
+              ) : (
+                <>
+                  <AppButton
+                    variant="tertiary"
+                    onClick={() => onNavigate('login')}
+                  >
+                    Log in
+                  </AppButton>
+                  <AppButton
+                    variant="primary"
+                    onClick={() => onNavigate('signup')}
+                  >
+                    Join for Free
+                  </AppButton>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -120,26 +132,41 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
               
               {showAuthSection && (
                 <div className="border-t pt-3 space-y-2" style={{ borderColor: 'rgba(0, 245, 212, 0.2)' }}>
-                  <AppButton
-                    variant="tertiary"
-                    onClick={() => {
-                      onNavigate('login');
-                      setShowMobileMenu(false);
-                    }}
-                    className="w-full"
-                  >
-                    Log in
-                  </AppButton>
-                  <AppButton
-                    variant="primary"
-                    onClick={() => {
-                      onNavigate('signup');
-                      setShowMobileMenu(false);
-                    }}
-                    className="w-full"
-                  >
-                    Join for Free
-                  </AppButton>
+                  {isLoggedIn ? (
+                    <AppButton
+                      variant="primary"
+                      onClick={() => {
+                        onNavigate('dashboard');
+                        setShowMobileMenu(false);
+                      }}
+                      className="w-full"
+                    >
+                      Go to Dashboard
+                    </AppButton>
+                  ) : (
+                    <>
+                      <AppButton
+                        variant="tertiary"
+                        onClick={() => {
+                          onNavigate('login');
+                          setShowMobileMenu(false);
+                        }}
+                        className="w-full"
+                      >
+                        Log in
+                      </AppButton>
+                      <AppButton
+                        variant="primary"
+                        onClick={() => {
+                          onNavigate('signup');
+                          setShowMobileMenu(false);
+                        }}
+                        className="w-full"
+                      >
+                        Join for Free
+                      </AppButton>
+                    </>
+                  )}
                 </div>
               )}
             </div>

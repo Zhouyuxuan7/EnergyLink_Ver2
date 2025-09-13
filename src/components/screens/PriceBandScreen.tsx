@@ -17,7 +17,7 @@ export function PriceBandScreen({ role, onBack, onComplete }: PriceBandScreenPro
   const [sameBlockFirst, setSameBlockFirst] = useState(true);
 
   const handleEnableAutoMatch = () => {
-    toast.success("Auto-match enabled! We'll start finding trades for you.");
+    toast.success("Auto-trade enabled! We'll start finding trades for you.");
     setTimeout(() => {
       onComplete();
     }, 1500);
@@ -111,7 +111,7 @@ export function PriceBandScreen({ role, onBack, onComplete }: PriceBandScreenPro
           onClick={handleEnableAutoMatch}
           className="w-full"
         >
-          Enable Auto-Match
+          Enable Auto-Trade
         </AppButton>
       </div>
     </div>

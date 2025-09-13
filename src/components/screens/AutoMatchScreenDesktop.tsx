@@ -99,7 +99,7 @@ export function AutoMatchScreenDesktop({ role, onTradeClick }: AutoMatchScreenDe
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3">
                   <Zap className="w-6 h-6 text-[#2E7D32]" />
-                  <h3 className="text-xl font-semibold text-gray-900">Auto-Match Status</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">Auto-Trade Status</h3>
                 </div>
                 <StatusPill status={currentStatus}>
                   {isPaused ? 'Paused' : 'Active'}

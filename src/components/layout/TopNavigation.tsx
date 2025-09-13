@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '../ui/dropdown-menu';
-import { Home, Zap, Users, Settings, LogOut, User, Menu, X } from 'lucide-react';
+import { Home, Zap, Users, Settings, LogOut, User, Menu, X, ArrowLeft } from 'lucide-react';
 import { AutoTradeToggle } from '../stock/AutoTradeToggle';
 
 interface TopNavigationProps {
@@ -39,20 +39,34 @@ export function TopNavigation({
         : 'bg-white border-gray-200'
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-            isDarkMode ? 'bg-[#00ff88]' : 'bg-[#2E7D32]'
-          }`}>
-            <Zap className={`w-6 h-6 ${isDarkMode ? 'text-[#0a0a0b]' : 'text-white'}`} />
-          </div>
-          <div>
-            <h1 className={`text-xl font-semibold ${
-              isDarkMode ? 'text-[#f8fafc]' : 'text-gray-900'
-            }`}>EnergyLink</h1>
-            <p className={`text-sm ${
-              isDarkMode ? 'text-[#64748b]' : 'text-gray-500'
-            }`}>P2P Energy Trading</p>
+        {/* Logo and Back Button */}
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={() => onNavigate('home')}
+            className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+              isDarkMode 
+                ? 'text-[#64748b] hover:text-[#f8fafc] hover:bg-[#1a1a1d]'
+                : 'text-gray-600 hover:text-[#2E7D32] hover:bg-gray-50'
+            }`}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm font-medium">Back to Home</span>
+          </button>
+          
+          <div className="flex items-center space-x-3">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+              isDarkMode ? 'bg-[#00ff88]' : 'bg-[#2E7D32]'
+            }`}>
+              <Zap className={`w-6 h-6 ${isDarkMode ? 'text-[#0a0a0b]' : 'text-white'}`} />
+            </div>
+            <div>
+              <h1 className={`text-xl font-semibold ${
+                isDarkMode ? 'text-[#f8fafc]' : 'text-gray-900'
+              }`}>EnergyLink</h1>
+              <p className={`text-sm ${
+                isDarkMode ? 'text-[#64748b]' : 'text-gray-500'
+              }`}>P2P Energy Trading</p>
+            </div>
           </div>
         </div>
 
@@ -84,7 +98,18 @@ export function TopNavigation({
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center space-x-2">
+          <button
+            onClick={() => onNavigate('home')}
+            className={`flex items-center space-x-1 px-2 py-1 rounded-lg transition-colors ${
+              isDarkMode 
+                ? 'text-[#64748b] hover:text-[#f8fafc] hover:bg-[#1a1a1d]'
+                : 'text-gray-600 hover:text-[#2E7D32] hover:bg-gray-50'
+            }`}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-xs">Home</span>
+          </button>
           <button
             onClick={() => setShowMobileMenu(!showMobileMenu)}
             className={`w-10 h-10 rounded-lg flex items-center justify-center ${

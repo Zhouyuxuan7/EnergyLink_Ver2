@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { KBarChart } from '../stock/KBarChart';
+import { CandlestickChart } from '../stock/CandlestickChart';
 import { KpiStat } from '../stock/KpiStat';
 import { LiveTransactionsList } from '../stock/LiveTransactionsList';
 import { TradePanel } from '../stock/TradePanel';
@@ -21,21 +21,13 @@ interface Transaction {
 
 export function DashboardScreen({ role, className = '' }: DashboardScreenProps) {
   const [chartTimeframe, setChartTimeframe] = useState<'24H' | '7D' | '30D'>('24H');
-  const [chartVariant, setChartVariant] = useState<'state_1' | 'state_2' | 'state_3' | 'state_4' | 'state_5' | 'state_6'>('state_1');
   const [kpiVariant, setKpiVariant] = useState<'value_1' | 'value_2' | 'value_3'>('value_1');
   const [transactionVariant, setTransactionVariant] = useState<'v1' | 'v2' | 'v3' | 'v4'>('v1');
   const [transactionFilter, setTransactionFilter] = useState<'ALL' | 'EXECUTING' | 'SETTLED'>('ALL');
 
-  // Simulate live updates every 2 seconds
+  // Simulate live updates every 2 seconds for KPI and transactions
   useEffect(() => {
     const interval = setInterval(() => {
-      // Cycle through chart variants
-      setChartVariant(prev => {
-        const variants: typeof chartVariant[] = ['state_1', 'state_2', 'state_3', 'state_4', 'state_5', 'state_6'];
-        const currentIndex = variants.indexOf(prev);
-        return variants[(currentIndex + 1) % variants.length];
-      });
-
       // Cycle through KPI variants
       setKpiVariant(prev => {
         const variants: typeof kpiVariant[] = ['value_1', 'value_2', 'value_3'];
@@ -120,14 +112,10 @@ export function DashboardScreen({ role, className = '' }: DashboardScreenProps) 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Chart - Takes 2/3 to 3/4 width */}
           <div className="lg:col-span-3">
-            <KBarChart
-              title="Auto-Match Status"
+            <CandlestickChart
+              title="Auto-Trade Status"
               timeframe={chartTimeframe}
               onTimeframeChange={setChartTimeframe}
-              currentPrice="$0.149"
-              priceChange="+$0.008"
-              priceChangePercent="+5.7%"
-              variant={chartVariant}
               className="h-full"
             />
           </div>

@@ -593,13 +593,13 @@ function toggleAutoMatch(active) {
     if (active) {
         statusIndicator.classList.remove('inactive');
         statusIndicator.classList.add('active');
-        statusText.textContent = 'Auto-Match Active';
-        showNotification('Auto-Match trading enabled', 'success');
+        statusText.textContent = 'Auto-Trade Active';
+        showNotification('Auto-Trade trading enabled', 'success');
     } else {
         statusIndicator.classList.remove('active');
         statusIndicator.classList.add('inactive');
-        statusText.textContent = 'Auto-Match Inactive';
-        showNotification('Auto-Match trading disabled', 'info');
+        statusText.textContent = 'Auto-Trade Inactive';
+        showNotification('Auto-Trade trading disabled', 'info');
     }
 }
 

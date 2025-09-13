@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { KpiStat } from '../stock/KpiStat';
-import { KBarChart } from '../stock/KBarChart';
+import { CandlestickChart } from '../stock/CandlestickChart';
 import { LiveTransactionsList } from '../stock/LiveTransactionsList';
 import { TradePanel } from '../stock/TradePanel';
 import { LeaderboardRow } from '../stock/LeaderboardRow';
@@ -76,16 +76,12 @@ export function ComponentsScreen() {
 
         {/* Chart Component */}
         <section className="mb-12">
-          <h2 className="text-xl font-semibold text-[#f8fafc] mb-6">K-Bar Chart</h2>
+          <h2 className="text-xl font-semibold text-[#f8fafc] mb-6">K-Line Candlestick Chart</h2>
           <div className="max-w-4xl">
-            <KBarChart
-              title="Auto-Match Status"
+            <CandlestickChart
+              title="Auto-Trade Status"
               timeframe={chartTimeframe}
               onTimeframeChange={setChartTimeframe}
-              currentPrice="$0.149"
-              priceChange="+$0.008"
-              priceChangePercent="+5.7%"
-              variant="state_1"
             />
           </div>
         </section>

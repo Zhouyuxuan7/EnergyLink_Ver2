@@ -167,7 +167,7 @@ export function OnboardingScreenDesktop({ preselectedRole, onRoleSelect }: Onboa
                 <div className="w-12 h-12 bg-[#2E7D32] rounded-full flex items-center justify-center mx-auto">
                   <span className="text-lg font-bold text-white">2</span>
                 </div>
-                <h4 className="font-semibold">Auto-Matching</h4>
+                <h4 className="font-semibold">Auto-Trading</h4>
                 <p className="text-sm text-gray-600">Our system automatically matches you with compatible neighbors</p>
               </div>
               <div className="text-center space-y-3">

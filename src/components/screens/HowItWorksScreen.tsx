@@ -50,7 +50,7 @@ export function HowItWorksScreen({ onJoinForFree }: HowItWorksScreenProps) {
     },
     {
       number: 3,
-      title: 'Auto-match with neighbors',
+      title: 'Auto-trade with neighbors',
       description: 'Our intelligent system automatically finds compatible neighbors and executes trades based on your preferences.',
       icon: <Zap className="w-8 h-8" />,
       details: [

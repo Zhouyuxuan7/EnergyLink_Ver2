@@ -49,7 +49,7 @@ export function AutoMatchScreen({ role, onBack, onTradeClick, onSettings, onComm
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-semibold text-gray-900">Auto-Match</h1>
+          <h1 className="font-semibold text-gray-900">Auto-Trade</h1>
           <button
             onClick={onSettings}
             className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100"

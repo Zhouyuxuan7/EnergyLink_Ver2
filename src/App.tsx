@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster } from './components/ui/sonner';
 
 // Import all screens
@@ -28,6 +28,7 @@ export default function App() {
   const [selectedTrade, setSelectedTrade] = useState<any>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [autoTradeEnabled, setAutoTradeEnabled] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [signupData, setSignupData] = useState<{
     role: 'seller' | 'buyer';
     email: string;
@@ -36,7 +37,11 @@ export default function App() {
   } | null>(null);
 
   const navigate = (screen: Screen) => {
-    setCurrentScreen(screen);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentScreen(screen);
+      setIsTransitioning(false);
+    }, 150);
   };
 
   const handleJoinForFree = () => {
@@ -46,13 +51,14 @@ export default function App() {
   const handleLoginSuccess = (role: 'seller' | 'buyer') => {
     setUserRole(role);
     setIsLoggedIn(true);
-    navigate('dashboard');
+    setCurrentScreen('dashboard');
   };
 
   const handleSignOut = () => {
     setUserRole(null);
     setIsLoggedIn(false);
-    navigate('login');
+    setSignupData(null);
+    setCurrentScreen('home');
   };
 
   const handleSignupComplete = (data: { role: 'seller' | 'buyer'; email: string; phone: string; verifyBy: 'email' | 'sms' }) => {
@@ -70,100 +76,117 @@ export default function App() {
     navigate('receipt');
   };
 
-  const showMainNav = !['login', 'verification', 'priceband'].includes(currentScreen) && !isLoggedIn;
-  const showTopNav = ['dashboard', 'receipt', 'settings', 'community', 'components'].includes(currentScreen) && isLoggedIn;
-  const showAuthSection = !['dashboard', 'receipt', 'settings', 'community'].includes(currentScreen);
+  // Navigation visibility logic
+  const isPublicScreen = ['home', 'how-it-works', 'impact', 'style-guide'].includes(currentScreen);
+  const isAuthScreen = ['login', 'signup', 'verification', 'priceband'].includes(currentScreen);
+  const isProtectedScreen = ['dashboard', 'receipt', 'settings', 'community'].includes(currentScreen);
+  
+  const showMainNav = isPublicScreen || (isAuthScreen && !isLoggedIn);
+  const showTopNav = isProtectedScreen && isLoggedIn;
+  const showAuthSection = isPublicScreen || (isAuthScreen && !isLoggedIn);
 
   const renderScreen = () => {
-    switch (currentScreen) {
-      case 'home':
-        return <HomeScreen onJoinForFree={handleJoinForFree} />;
-      
-      case 'how-it-works':
-        return <HowItWorksScreen onJoinForFree={handleJoinForFree} />;
-      
-      case 'impact':
-        return <ImpactScreen onJoinForFree={handleJoinForFree} />;
-      
-      case 'login':
-        return <LoginScreen onLoginSuccess={handleLoginSuccess} />;
-      
-      case 'signup':
-        return <SignupScreen onComplete={handleSignupComplete} />;
-      
-      case 'verification':
-        return signupData ? (
-          <VerificationScreen
-            verifyBy={signupData.verifyBy}
-            email={signupData.email}
-            phone={signupData.phone}
-            onVerified={handleVerified}
-          />
-        ) : null;
-      
-      case 'priceband':
-        return (
-          <PriceBandScreenDesktop
-            role={userRole!}
-            onComplete={() => {
-              setIsLoggedIn(true);
-              navigate('dashboard');
-            }}
-          />
-        );
-      
-      case 'dashboard':
-        if (!isLoggedIn) {
-          navigate('login');
-          return null;
-        }
-        return (
-          <DashboardScreen
-            role={userRole!}
-          />
-        );
-      
-      case 'receipt':
-        if (!isLoggedIn) {
-          navigate('login');
-          return null;
-        }
-        return (
-          <TradeReceiptScreenDesktop
-            role={userRole!}
-            trade={selectedTrade}
-            onBack={() => navigate('dashboard')}
-          />
-        );
-      
-      case 'community':
-        if (!isLoggedIn) {
-          navigate('login');
-          return null;
-        }
-        return <CommunityScreenNew />;
-      
-      case 'settings':
-        if (!isLoggedIn) {
-          navigate('login');
-          return null;
-        }
-        return (
-          <SettingsScreenDesktop 
-            isDarkMode={isDarkMode}
-            onThemeToggle={() => setIsDarkMode(!isDarkMode)}
-          />
-        );
-      
-      case 'components':
-        return <ComponentsScreen />;
-      
-      case 'style-guide':
-        return <StyleGuideScreen />;
-      
-      default:
-        return <HomeScreen onJoinForFree={handleJoinForFree} />;
+    // Only redirect if we're not in the middle of a login process
+    // Redirect to home if trying to access protected screens without auth
+    if (isProtectedScreen && !isLoggedIn && currentScreen !== 'login') {
+      navigate('home');
+      return null;
     }
+
+    // Redirect to dashboard if trying to access auth screens while logged in
+    // But not if we just logged in (to avoid redirect loops)
+    if (isAuthScreen && isLoggedIn && currentScreen !== 'login') {
+      navigate('dashboard');
+      return null;
+    }
+
+    const screenContent = (() => {
+      switch (currentScreen) {
+        case 'home':
+          return <HomeScreen onJoinForFree={handleJoinForFree} />;
+        
+        case 'how-it-works':
+          return <HowItWorksScreen onJoinForFree={handleJoinForFree} />;
+        
+        case 'impact':
+          return <ImpactScreen onJoinForFree={handleJoinForFree} />;
+        
+        case 'login':
+          return <LoginScreen onLoginSuccess={handleLoginSuccess} />;
+        
+        case 'signup':
+          return <SignupScreen onComplete={handleSignupComplete} />;
+        
+        case 'verification':
+          return signupData ? (
+            <VerificationScreen
+              verifyBy={signupData.verifyBy}
+              email={signupData.email}
+              phone={signupData.phone}
+              onVerified={handleVerified}
+            />
+          ) : null;
+        
+        case 'priceband':
+          return (
+            <PriceBandScreenDesktop
+              role={userRole!}
+              onComplete={() => {
+                setIsLoggedIn(true);
+                setCurrentScreen('dashboard');
+              }}
+            />
+          );
+        
+        case 'dashboard':
+          return (
+            <DashboardScreen
+              role={userRole!}
+            />
+          );
+        
+        case 'receipt':
+          return (
+            <TradeReceiptScreenDesktop
+              role={userRole!}
+              trade={selectedTrade}
+              onBack={() => setCurrentScreen('dashboard')}
+            />
+          );
+        
+        case 'community':
+          return <CommunityScreenNew />;
+        
+        case 'settings':
+          return (
+            <SettingsScreenDesktop 
+              isDarkMode={isDarkMode}
+              onThemeToggle={() => setIsDarkMode(!isDarkMode)}
+            />
+          );
+        
+        case 'components':
+          return <ComponentsScreen />;
+        
+        case 'style-guide':
+          return <StyleGuideScreen />;
+        
+        default:
+          return <HomeScreen onJoinForFree={handleJoinForFree} />;
+      }
+    })();
+
+    return (
+      <div 
+        className={`transition-all duration-300 ease-in-out ${
+          isTransitioning 
+            ? 'opacity-0 transform translate-y-4' 
+            : 'opacity-100 transform translate-y-0'
+        }`}
+      >
+        {screenContent}
+      </div>
+    );
   };
 
   return (
@@ -174,6 +197,7 @@ export default function App() {
           currentScreen={currentScreen}
           onNavigate={navigate}
           showAuthSection={showAuthSection}
+          isLoggedIn={isLoggedIn}
         />
       )}
       {showTopNav && (

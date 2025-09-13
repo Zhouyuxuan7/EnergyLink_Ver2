@@ -16,7 +16,7 @@ export function PriceBandScreenDesktop({ role, onComplete }: PriceBandScreenDesk
   const [sameBlockFirst, setSameBlockFirst] = useState(true);
 
   const handleEnableAutoMatch = () => {
-    toast.success("Auto-match enabled! We'll start finding trades for you.");
+    toast.success("Auto-trade enabled! We'll start finding trades for you.");
     setTimeout(() => {
       onComplete();
     }, 1500);
@@ -31,7 +31,7 @@ export function PriceBandScreenDesktop({ role, onComplete }: PriceBandScreenDesk
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Set your trading preferences</h1>
           <p className="text-xl text-gray-600">
-            Configure your {role === 'seller' ? 'selling' : 'buying'} preferences to start auto-matching
+            Configure your {role === 'seller' ? 'selling' : 'buying'} preferences to start auto-trading
           </p>
         </div>
 
@@ -223,7 +223,7 @@ export function PriceBandScreenDesktop({ role, onComplete }: PriceBandScreenDesk
               className="w-full"
               icon={<Zap className="w-5 h-5" />}
             >
-              Enable Auto-Match
+              Enable Auto-Trade
             </AppButton>
           </div>
         </div>
