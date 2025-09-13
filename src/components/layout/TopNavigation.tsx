@@ -8,6 +8,7 @@ interface TopNavigationProps {
   currentScreen: string;
   onNavigate: (screen: string) => void;
   userRole?: 'seller' | 'buyer' | null;
+  userEmail?: string;
   onSignOut?: () => void;
   autoTradeEnabled?: boolean;
   onAutoTradeToggle?: () => void;
@@ -17,6 +18,7 @@ export function TopNavigation({
   currentScreen, 
   onNavigate, 
   userRole, 
+  userEmail,
   onSignOut,
   autoTradeEnabled = true,
   onAutoTradeToggle
@@ -134,7 +136,7 @@ export function TopNavigation({
               <p className={`text-sm font-medium ${
                 isDarkMode ? 'text-[#f8fafc]' : 'text-gray-900'
               }`}>
-                {userRole === 'seller' ? 'Solar Seller' : 'Energy Buyer'}
+                {userEmail || (userRole === 'seller' ? 'Solar Seller' : 'Energy Buyer')}
               </p>
               <p className={`text-xs ${
                 isDarkMode ? 'text-[#64748b]' : 'text-gray-500'
@@ -242,10 +244,10 @@ export function TopNavigation({
                 <div>
                   <p className={`text-sm font-medium ${
                     isDarkMode ? 'text-[#f8fafc]' : 'text-gray-900'
-                  }`}>Demo User</p>
+                  }`}>{userEmail || 'Demo User'}</p>
                   <p className={`text-xs ${
                     isDarkMode ? 'text-[#64748b]' : 'text-gray-500'
-                  }`}>demo@energylink.app</p>
+                  }`}>Verified Neighbor</p>
                 </div>
               </div>
               

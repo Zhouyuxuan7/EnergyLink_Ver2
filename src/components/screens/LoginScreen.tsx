@@ -4,7 +4,7 @@ import { Zap, Mail, Lock, X } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 interface LoginScreenProps {
-  onLoginSuccess: (role: 'seller' | 'buyer') => void;
+  onLoginSuccess: (role: 'seller' | 'buyer', email: string) => void;
   onClose?: () => void;
 }
 
@@ -27,7 +27,7 @@ export function LoginScreen({ onLoginSuccess, onClose }: LoginScreenProps) {
     setTimeout(() => {
       toast.success("Welcome to EnergyLink!");
       // Default to seller role - could be randomized or user-selected
-      onLoginSuccess('seller');
+      onLoginSuccess('seller', email);
       setIsLoading(false);
     }, 800);
   };

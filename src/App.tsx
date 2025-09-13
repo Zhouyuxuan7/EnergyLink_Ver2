@@ -23,6 +23,7 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
   const [userRole, setUserRole] = useState<Role>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>('');
   const [selectedTrade, setSelectedTrade] = useState<any>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [autoTradeEnabled, setAutoTradeEnabled] = useState(true);
@@ -41,8 +42,9 @@ export default function App() {
     setShowLoginPopup(true);
   };
 
-  const handleLoginSuccess = (role: 'seller' | 'buyer') => {
+  const handleLoginSuccess = (role: 'seller' | 'buyer', email: string) => {
     setUserRole(role);
+    setUserEmail(email);
     setIsLoggedIn(true);
     setShowLoginPopup(false);
     setCurrentScreen('dashboard');
@@ -50,6 +52,7 @@ export default function App() {
 
   const handleSignOut = () => {
     setUserRole(null);
+    setUserEmail('');
     setIsLoggedIn(false);
     setCurrentScreen('home');
   };
@@ -174,6 +177,7 @@ export default function App() {
           currentScreen={currentScreen}
           onNavigate={navigate}
           userRole={userRole}
+          userEmail={userEmail}
           onSignOut={handleSignOut}
           autoTradeEnabled={autoTradeEnabled}
           onAutoTradeToggle={() => setAutoTradeEnabled(!autoTradeEnabled)}
